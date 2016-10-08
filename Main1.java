@@ -1,11 +1,8 @@
 import java.util.Scanner;
 
-import java.util.Scanner;
-
 public class Main1 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		PhoneBook book = new PhoneBook();
 		//PhoneCall call1 = new PhoneCall();
 		CallHistory history = new CallHistory();
 		////////////////////////////////////////////////////////////
@@ -25,16 +22,21 @@ public class Main1 {
 		/////////////////////////////////////////////
 		//TESTING PURPOSES: FAVORITES
 		Contact one = new Contact("Timmy", "7630589246", "Yummy");
+		FavoriteContactFrame firstframe = new FavoriteContactFrame("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
 		Contact two = new Contact("Hercules", "9239036", "You're so strong ;) ");
+		FavoriteContactFrame secondframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
 		Contact three = new Contact("Armani", "9282937345", "Sameeeeeee");
+		FavoriteContactFrame thirdframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
 		Contact four = new Contact("Gucci", "8720182", "WTF CALVIN HARRIS != TAYLOR SWIFT");
+		FavoriteContactFrame fourthframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
 		Contact five = new Contact("Cleo", "4522834", "First love");
-		Favorite top1 = new Favorite(one,1);
-		Favorite top2 = new Favorite(two,2);
-		Favorite top3 = new Favorite(three,3);
-		Favorite top4 = new Favorite(four,4);
-		Favorite top5 = new Favorite(five,5);
-		PhoneBook.addFavorite(top1);
+		FavoriteContactFrame fifthframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
+		Favorite top1 = new Favorite(one,1,firstframe);
+		Favorite top2 = new Favorite(two,2,secondframe);
+		Favorite top3 = new Favorite(three,3,thirdframe);
+		Favorite top4 = new Favorite(four,4,fourthframe);
+		Favorite top5 = new Favorite(five,5,fifthframe);
+		//PhoneBook.addFavorite(top1);
 		PhoneBook.addFavorite(top2);
 		PhoneBook.addFavorite(top3);
 		PhoneBook.addFavorite(top4);
@@ -150,6 +152,8 @@ public class Main1 {
 		//////////////////////////////////////////////////////////
 		//Receive a call	
 		case 2:
+			String again3 = "";
+			while (!again3.equals("done")){
 			int areaCode = (int) (Math.random()*999);
 			int firstNumber = (int)(Math.random()*999);
 			int secondNumber = (int) (Math.random()*9999);
@@ -171,6 +175,9 @@ public class Main1 {
 				answer = scan.nextLine();
 			}
 			}
+			System.out.println("Do you want to receive another call? (add/done)");
+			again3 = scan.nextLine();
+			}
 			break;
 		////////////////////////////////////////////////////////////
 		//Access Top 5
@@ -179,20 +186,56 @@ public class Main1 {
 			int response3 = scan.nextInt();
 			scan.nextLine();
 			switch (response3){
+			//Adding Favorite contact
 			case 1:
+				String again = "";
+				while(!again.equals("done")){
+				System.out.println("Enter the name of the favorite contact");
+				String favName = scan.nextLine();
+				System.out.println("Enter the number of the favorite contact.");
+				String favNumber = scan.nextLine();
+				while (favNumber.length() != 10 && favNumber.length() != 7) {
+					System.out.println("Phone number is invalid, please enter a valid phone number.");
+					favNumber = scan.nextLine();
+				}
+				System.out.println("Enter the note for the favorite contact.");
+				String favNote = scan.nextLine();
+				Contact favContact = new Contact(favName,favNumber,favNote);
+				System.out.println("Enter the speed dial number of this favorite contact.");
+				int favSpeedDial = Integer.parseInt(scan.nextLine());
+				while(favSpeedDial < 1 || favSpeedDial > 5){
+					System.out.println("Enter a valid speed dial number (1-5)");
+					favSpeedDial = Integer.parseInt(scan.nextLine());
+				}
+				//NEEDS ALOT MORE WORK TO CHECK FOR MULTIPLE SPEED DIAL #
+				System.out.println("Enter the path of the picture of the favorite contact.");
+				String path = scan.nextLine();
+				System.out.println("Enter the width of the image.");
+				int imageWidth = Integer.parseInt(scan.nextLine());
+				System.out.println("Enter the height of the image.");
+				int imageHeight = Integer.parseInt(scan.nextLine());
+				FavoriteContactFrame contactFrame = new FavoriteContactFrame(path,imageWidth,imageHeight);
+				Favorite favFavorite = new Favorite(favContact, favSpeedDial, contactFrame);
+				PhoneBook.addFavorite(favFavorite);
+				System.out.println("Do you want to add another favorite? (add/done)");
+				again = scan.nextLine();
+			}
 				break;
+			//Removing favorite contact
 			case 2:
 				break;
+			//Switching speed dial #'s
 			case 3:
 				break;
+			//Display favorite frame
 			case 4:
 				System.out.println("Which favorites information do you want displayed");
 				int answer1 = Integer.parseInt(scan.nextLine());
-					for (int i = 0; i < book.getFavoriteSize(); i++)
+					for (int i = 0; i < PhoneBook.getFavoriteSize(); i++)
 					{
 						if(answer1 == PhoneBook.getFavoriteArrayList().get(i).getSpeedDial())
 						{
-							//System.out.println("You are displaying " + PhoneBook.getFavoriteArrayList().get(i).getName() + "'s info");
+							PhoneBook.getFavoriteArrayList().get(i).getContactFrame().displayContactImage(PhoneBook.getFavoriteArrayList().get(i).getName());;
 						}
 					}
 				break;

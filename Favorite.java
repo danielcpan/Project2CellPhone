@@ -3,10 +3,13 @@ public class Favorite extends Contact {
 
 
 	private int speedDial;
+	private FavoriteContactFrame contactframe;
+	
 
-	public Favorite(Contact favorite, int speedDial) {
+	public Favorite(Contact favorite, int speedDial, FavoriteContactFrame contactframe) {
 		super(favorite.getName(),favorite.getNumber(),favorite.getNotes());
 		this.setSpeedDial(speedDial);
+		this.setContactFrame(contactframe);
 		
 	}
 
@@ -16,6 +19,13 @@ public class Favorite extends Contact {
 
 	public int getSpeedDial() {
 		return speedDial;
+	}
+	public void setContactFrame(FavoriteContactFrame contactframe){
+		this.contactframe = contactframe;
+	}
+	
+	public FavoriteContactFrame getContactFrame(){
+		return contactframe;
 	}
 	
 	public void setAll() {
