@@ -120,11 +120,11 @@ public class Main1 {
 			String answer = scan.nextLine();
 			boolean validAns = false;
 			while(!validAns){
-			if(answer.equals("y")){
+			if(answer.equalsIgnoreCase("y")){
 				System.out.println("You picked up, Call was recorded.");			
 				validAns = true;
 			}
-			else if(answer.equals("n")){
+			else if(answer.equalsIgnoreCase("n")){
 				System.out.println("You declined the call.");
 				validAns = true;
 			}
@@ -201,7 +201,7 @@ public class Main1 {
 			break;
 		////////////////////////////////////////////////////////////
 		//End program
-		case 6:
+		default:
 			end = true;
 			break;
 		}
