@@ -5,10 +5,9 @@ public class Contact {
 	private static final String DEFAULT_NOTES = "";
 	private static final String DEFAULT_FAVORITE = "";
 
-	private String name;
-	private String cellNumber;
-	private String notes;
-	private String favorite;
+	String name;
+	String cellNumber;
+	String notes;
 
 	public Contact() {
 		this.setName(DEFAULT_NAME);
@@ -50,14 +49,6 @@ public class Contact {
 
 	public String getNotes() {
 		return this.notes;
-	}
-
-	public void setFavorite(String favorite) {
-		this.favorite = favorite;
-	}
-
-	public String getFavorite() {
-		return favorite;
 	}
 
 }
