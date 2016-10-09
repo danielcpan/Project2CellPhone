@@ -39,7 +39,7 @@ public class PhoneCall {
 			amPM = "AM";
 		}
 		else {
-			amPM = "PM"
+			amPM = "PM";
 		}
 		this.timestamp = hour + ":" + minute + ":" + amPM + "\n" + month + "/" + day + "/" + year;
 	}
