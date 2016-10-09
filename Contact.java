@@ -5,9 +5,9 @@ public class Contact {
 	private static final String DEFAULT_NOTES = "";
 	private static final String DEFAULT_FAVORITE = "";
 
-	String name;
-	String cellNumber;
-	String notes;
+	private String name;
+	private String cellNumber;
+	private String notes;
 
 	public Contact() {
 		this.setName(DEFAULT_NAME);
