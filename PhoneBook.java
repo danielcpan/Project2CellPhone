@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-
 public class PhoneBook{
 	private static ArrayList<Contact> contacts = new ArrayList<Contact>();
 	private static ArrayList<Favorite> favorites = new ArrayList<Favorite>();
@@ -27,7 +25,7 @@ public class PhoneBook{
 		return contacts.size();
 	}
 
-	public int getFavoriteSize() {
+	public static int getFavoriteSize() {
 		return favorites.size();
 	}
 	
