@@ -2,6 +2,7 @@ import java.util.Calendar;
 
 public class PhoneCall {
 	private String timestamp;
+	private String timestampDateOnly;
 	private boolean isIncoming;
 	private Contact contact;
 	private String incoming;
@@ -16,13 +17,14 @@ public class PhoneCall {
 	// }
 	public PhoneCall(Contact contact, String timestamp, boolean isIncoming) {
 		this.calcTimestamp();
-		this.setAll(contact, this.getTimestamp(), isIncoming, numberOfCalls);
+		this.setAll(contact, this.getTimestamp(), isIncoming, numberOfCalls, this.getTimestampDateOnly());
 	}
-	public void setAll(Contact contact, String timestamp, boolean isIncoming, int numberOfCalls) {
+	public void setAll(Contact contact, String timestamp, boolean isIncoming, int numberOfCalls, String timestampDateOnly) {
 		this.setContact(contact);
 		this.setTimestamp(timestamp);
 		this.setisIncoming(isIncoming);
 		this.setNumberOfCalls(numberOfCalls);
+		this.setTimestampDateOnly(timestampDateOnly);
 	}
 
 	public void setContact(Contact contact) {
@@ -31,6 +33,10 @@ public class PhoneCall {
 
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public void setTimestampDateOnly(String timestampDateOnly) {
+		this.timestampDateOnly = timestampDateOnly;
 	}
 
 	public void setisIncoming(boolean isIncoming) {
@@ -58,11 +64,16 @@ public class PhoneCall {
 		else {
 			amPm = "PM";
 		}
-		this.timestamp = hour + ":" + minute + ":" + amPm + "\n" + month + "/" + day + "/" + year;
+		this.timestampDateOnly = (month + "/" + day + "/" + year);
+		this.timestamp = hour + ":" + minute + ":" + amPm;
 	}
 
 	public String getTimestamp() {
 		return timestamp;
+	}
+
+	public String getTimestampDateOnly() {
+		return timestampDateOnly;
 	}
 
 	public Contact getContact() {

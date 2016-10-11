@@ -41,29 +41,32 @@ public class CallHistory {
 			System.out.println("--------------------");
 			for (int i = 0; i < log.size(); i++) {
 				if (log.get(i).getNumberOfCalls() > 1) {
-					System.out.println("Name: " + log.get(i).getContact().getName() + " (" + log.get(i).getNumberOfCalls() + ")");
-					System.out.println("Number: " + log.get(i).getContact().getNumber());
+					System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName() + " (" + log.get(i).getNumberOfCalls() + ")");
+					System.out.println("  |Number: " + log.get(i).getContact().getNumber());
 					System.out.println("--------------------");
 				}
 				if (log.get(i).getNumberOfCalls() == 1) {
-					System.out.println("Name: " + log.get(i).getContact().getName());
-					System.out.println("Number: " + log.get(i).getContact().getNumber());
-					System.out.println("Time: " + log.get(i).getTimestamp());
-					System.out.println("Status: " + log.get(i).getIsIncoming());
+					System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName());
+					System.out.println("  |Number: " + log.get(i).getContact().getNumber());
+					System.out.println("  |Time: " + log.get(i).getTimestamp());
+					System.out.println("  |Date: " + log.get(i).getTimestampDateOnly());
+					System.out.println("  |Status: " + log.get(i).getIsIncoming());
 					System.out.println("--------------------");
 				}
 			}
 		}
 	}
 	public static void checkNumberOfCalls() {
-		int numberOfCalls = 1;
+		int numberOfCalls;
 		for (int i = 0; i < log.size(); i++) {
 			for (int j = i+1; j < log.size(); j++) {
-				if (log.get(i).getContact().getName().equals(log.get(j).getContact().getName())
-					&& log.get(i).getContact().getNumber().equals(log.get(j).getContact().getNumber())) {
+				if (log.get(i).getContact().getNumber().equals(log.get(j).getContact().getNumber())
+					&& log.get(i).getTimestampDateOnly().equals(log.get(j).getTimestampDateOnly())) {
+					numberOfCalls = log.get(i).getNumberOfCalls();
 					numberOfCalls++;
 					log.get(i).setNumberOfCalls(numberOfCalls);
 					log.remove(j);
+					j--;
 				}
 			}
 		}
