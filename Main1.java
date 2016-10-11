@@ -5,7 +5,7 @@ public class Main1 {
 
 	public static void main(String[] args) {
 		// Scanner scan = new Scanner(System.in);
-		//PhoneCall call1 = new PhoneCall();
+		// PhoneCall call1 = new PhoneCall();
 		CallHistory history = new CallHistory();
 		////////////////////////////////////////////////////////////
 		//TESTING PURPOSES: CONTACTS
@@ -21,30 +21,30 @@ public class Main1 {
 		//System.out.println("ssssssssssssssssssssssssssssssssss");
 		//PhoneBook.compareContacts();
 		PhoneBook.contactsToString();
-		/////////////////////////////////////////////
-		//TESTING PURPOSES: FAVORITES
-		Contact one = new Contact("Timmy", "7630589246", "Yummy");
-		FavoriteContactFrame firstframe = new FavoriteContactFrame("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
-		Contact two = new Contact("Hercules", "9239036", "You're so strong ;) ");
-		FavoriteContactFrame secondframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
-		Contact three = new Contact("Armani", "9282937345", "Sameeeeeee");
-		FavoriteContactFrame thirdframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
-		Contact four = new Contact("Gucci", "8720182", "WTF CALVIN HARRIS != TAYLOR SWIFT");
-		FavoriteContactFrame fourthframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
-		Contact five = new Contact("Cleo", "4522834", "First love");
-		FavoriteContactFrame fifthframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
-		Favorite top1 = new Favorite(one,1,firstframe);
-		Favorite top2 = new Favorite(two,2,secondframe);
-		Favorite top3 = new Favorite(three,3,thirdframe);
-		Favorite top4 = new Favorite(four,4,fourthframe);
-		Favorite top5 = new Favorite(five,5,fifthframe);
-		//PhoneBook.addFavorite(top1);
-		PhoneBook.addFavorite(top2);
-		PhoneBook.addFavorite(top3);
-		PhoneBook.addFavorite(top4);
-		PhoneBook.addFavorite(top5);
-		PhoneBook.favoritesToString();
-		/////////////////////////////////////////////
+				// /////////////////////////////////////////////
+				// //TESTING PURPOSES: FAVORITES
+				// Contact one = new Contact("Timmy", "7630589246", "Yummy");
+				// FavoriteContactFrame firstframe = new FavoriteContactFrame("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
+				// Contact two = new Contact("Hercules", "9239036", "You're so strong ;) ");
+				// FavoriteContactFrame secondframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
+				// Contact three = new Contact("Armani", "9282937345", "Sameeeeeee");
+				// FavoriteContactFrame thirdframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
+				// Contact four = new Contact("Gucci", "8720182", "WTF CALVIN HARRIS != TAYLOR SWIFT");
+				// FavoriteContactFrame fourthframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
+				// Contact five = new Contact("Cleo", "4522834", "First love");
+				// FavoriteContactFrame fifthframe = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", 800, 600);
+				// Favorite top1 = new Favorite(one,1,firstframe);
+				// Favorite top2 = new Favorite(two,2,secondframe);
+				// Favorite top3 = new Favorite(three,3,thirdframe);
+				// Favorite top4 = new Favorite(four,4,fourthframe);
+				// Favorite top5 = new Favorite(five,5,fifthframe);
+				// //PhoneBook.addFavorite(top1);
+				// PhoneBook.addFavorite(top2);
+				// PhoneBook.addFavorite(top3);
+				// PhoneBook.addFavorite(top4);
+				// PhoneBook.addFavorite(top5);
+				// PhoneBook.favoritesToString();
+				// /////////////////////////////////////////////
 		//Asking user to input favorites
 		/*for(int a = 1; a < 6; a++){
 			Contact favContact = new Contact();
@@ -137,6 +137,7 @@ public class Main1 {
 			////////////////////////////////////////////////////////////
 			//Access Call History
 			case 5:
+				history.displayCallLog();
 				break;
 			////////////////////////////////////////////////////////////
 			//End program
@@ -159,9 +160,12 @@ public class Main1 {
 	}
 
 	public static void callByNumber() {
+		CallHistory myCallHistory = new CallHistory();
+		// PhoneCall myPhoneCall = new PhoneCall();
 		String again1 = "";
 		while (!again1.equals("done")){
-		boolean numValid = false;
+			PhoneCall myPhoneCall = new PhoneCall();
+			boolean numValid = false;
 			System.out.println("What is the number you would like to call");
 			String number = scan.nextLine();
 			while (number.length() != 10 && number.length() != 7) {
@@ -171,6 +175,12 @@ public class Main1 {
 		for(int a = 0; a < PhoneBook.getContactSize(); a++){
 			if (number.equals(PhoneBook.getContactArrayList().get(a).getNumber())){
 				System.out.println("You called " + PhoneBook.getContactArrayList().get(a).getName());
+				PhoneCall recordedPhoneCall = new PhoneCall(PhoneBook.getContactArrayList().get(a), myPhoneCall.getTimestamp(), true);
+				// System.out.println("Swag");
+				// System.out.println(recordedPhoneCall.getContact());
+				// System.out.println(recordedPhoneCall.getTimestamp());
+				// System.out.println(recordedPhoneCall.getIsIncoming());
+				myCallHistory.addCall(recordedPhoneCall);
 				numValid = true;
 			}
 		}
@@ -179,6 +189,11 @@ public class Main1 {
 			Contact unknown = new Contact();
 			unknown.setNumber(number);
 			PhoneBook.addUnknown(unknown);
+			// myPhoneCall.setAll(unknown, myPhoneCall.getTimestamp(), true);
+			// System.out.println(myPhoneCall.getContact());
+			// System.out.println(myPhoneCall.getTimestamp());
+			// System.out.println(myPhoneCall.getIsIncoming());
+			// myCallHistory.addCall(unknown);
 			//PhoneBook.unknownToString(); // Testing unknown arraylist
 		}
 		System.out.println("Do you want to call another number? (add/done)");
