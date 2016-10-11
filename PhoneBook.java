@@ -1,43 +1,43 @@
 import java.util.ArrayList;
 
 public class PhoneBook{
-	private static ArrayList<Contact> contacts = new ArrayList<Contact>();
-	private static ArrayList<Favorite> favorites = new ArrayList<Favorite>();
-	private static ArrayList<Contact> unknowns = new ArrayList<Contact>();
-	private static Contact temporary;
+	private ArrayList<Contact> contacts = new ArrayList<Contact>();
+	private ArrayList<Favorite> favorites = new ArrayList<Favorite>();
+	private ArrayList<Contact> unknowns = new ArrayList<Contact>();
+	private Contact temporary;
 
 	public PhoneBook() {
 
 	}
 
-	public static void addContact(Contact userContact) {
+	public void addContact(Contact userContact) {
 		contacts.add(userContact);
 	}
 	
-	public static void addUnknown(Contact userUnknown){
+	public void addUnknown(Contact userUnknown){
 		unknowns.add(userUnknown);
 	}
 
-	public static void addFavorite(Favorite userFavorite) {
+	public void addFavorite(Favorite userFavorite) {
 		favorites.add(userFavorite);
 	}
-	public static int getContactSize() {
+	public int getContactSize() {
 		return contacts.size();
 	}
 
-	public static int getFavoriteSize() {
+	public int getFavoriteSize() {
 		return favorites.size();
 	}
 	
-	public static ArrayList<Contact> getContactArrayList(){
+	public ArrayList<Contact> getContactArrayList(){
 		return contacts;
 	}
-	public static ArrayList<Favorite> getFavoriteArrayList(){
+	public ArrayList<Favorite> getFavoriteArrayList(){
 		return favorites;
 	}
 	
 	
-	public static void contactsToString(){
+	public void contactsToString(){
 		for (int i = 0; i < contacts.size(); i++){
 			if (contacts.get(i).getNumber().length() == 10){
 				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number:(" + contacts.get(i).getNumber().substring(0,3) + ")" + 
@@ -53,20 +53,20 @@ public class PhoneBook{
 			
 		}
 	}
-	public static void favoritesToString(){
+	public void favoritesToString(){
 		for (int i = 0; i < favorites.size(); i++){
 			System.out.println(i + " Name: " + favorites.get(i).getName() + " Number: " + favorites.get(i).getNumber()
 					+ " Notes: " + favorites.get(i).getNotes() + " #: " + favorites.get(i).getSpeedDial());
 	}
 	}
 	
-	public static void unknownToString(){
+	public void unknownToString(){
 		for(int i = 0; i < unknowns.size(); i++){
 			System.out.println(i + " Name: " + unknowns.get(i).getName() + " Number: " + unknowns.get(i).getNumber() + " Notes: " + 
 					unknowns.get(i).getNotes());
 		}
 	}
-	public static void compareContacts() {
+	public void compareContacts() {
 		for (int i = 0; i < contacts.size(); i++) {
 			for (int j = 0; j < contacts.size(); j++) {
 				// greater than 0 means contact i comes after contact j
