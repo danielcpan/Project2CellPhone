@@ -5,7 +5,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		String again = " ";
-d
+
 		int favNum;
 
 		while (!again.equals("done")) {
