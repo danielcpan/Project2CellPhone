@@ -6,21 +6,22 @@ public class Main1 {
 	public static void main(String[] args) {
 		// Scanner scan = new Scanner(System.in);
 		// PhoneCall call1 = new PhoneCall();
-		CallHistory history = new CallHistory();
+		CallHistory myCallHistory = new CallHistory();
+		PhoneBook myPhoneBook = new PhoneBook();
 		////////////////////////////////////////////////////////////
 		//TESTING PURPOSES: CONTACTS
 		Contact first 	= new Contact("John", "9387836748", "C00l Guy");
 		Contact second 	= new Contact("Samantha", "8371907834", "Chick I met");
 		Contact third 	= new Contact("Pope Francis", "3980827", "HOLLLLLYYYYYY");
 		Contact fourth 	= new Contact("Commando", "2560637", "Command me, sir");
-		PhoneBook.addContact(first);
-		PhoneBook.addContact(second);
-		PhoneBook.addContact(third);
-		PhoneBook.addContact(fourth);
-		//PhoneBook.contactsToString();
+		myPhoneBook.addContact(first);
+		myPhoneBook.addContact(second);
+		myPhoneBook.addContact(third);
+		myPhoneBook.addContact(fourth);
+		//myPhoneBook.contactsToString();
 		//System.out.println("ssssssssssssssssssssssssssssssssss");
-		//PhoneBook.compareContacts();
-		PhoneBook.contactsToString();
+		//myPhoneBook.compareContacts();
+		myPhoneBook.contactsToString();
 				// /////////////////////////////////////////////
 				// //TESTING PURPOSES: FAVORITES
 				// Contact one = new Contact("Timmy", "7630589246", "Yummy");
@@ -38,12 +39,12 @@ public class Main1 {
 				// Favorite top3 = new Favorite(three,3,thirdframe);
 				// Favorite top4 = new Favorite(four,4,fourthframe);
 				// Favorite top5 = new Favorite(five,5,fifthframe);
-				// //PhoneBook.addFavorite(top1);
-				// PhoneBook.addFavorite(top2);
-				// PhoneBook.addFavorite(top3);
-				// PhoneBook.addFavorite(top4);
-				// PhoneBook.addFavorite(top5);
-				// PhoneBook.favoritesToString();
+				// //myPhoneBook.addFavorite(top1);
+				// myPhoneBook.addFavorite(top2);
+				// myPhoneBook.addFavorite(top3);
+				// myPhoneBook.addFavorite(top4);
+				// myPhoneBook.addFavorite(top5);
+				// myPhoneBook.favoritesToString();
 				// /////////////////////////////////////////////
 		//Asking user to input favorites
 		/*for(int a = 1; a < 6; a++){
@@ -59,8 +60,8 @@ public class Main1 {
 			System.out.println("Please enter any notes for: Contact Favorite #" + a);
 			favContact.setNotes(scan.nextLine());
 			Favorite userFavorite = new Favorite(favContact, a);
-			PhoneBook.addFavorite(userFavorite);
-					//PhoneBook.favoritesToString();
+			myPhoneBook.addFavorite(userFavorite);
+					//myPhoneBook.favoritesToString();
 		} */
 		
 		
@@ -80,20 +81,20 @@ public class Main1 {
 				scan.nextLine();
 				switch(response1) {
 				case 1:
-					callByNumber();
+					callByNumber(myPhoneBook, myCallHistory);
 					break;
 				case 2:
-					callByName();
+					callByName(myPhoneBook, myCallHistory);
 					break;
 				case 3:
-					callFromFavorites();
+					callFromFavorites();	//Not Finished
 					break;
 				}
 				break;
 			//////////////////////////////////////////////////////////
 			//Receive a call	
 			case 2:
-				receiveCall();
+				receiveCall(myPhoneBook, myCallHistory);
 				break;
 			////////////////////////////////////////////////////////////
 			//Access Top 5
@@ -103,7 +104,7 @@ public class Main1 {
 				scan.nextLine();
 				switch (response3){
 				case 1:
-					addFavoriteContact();
+					addFavoriteContact(myPhoneBook);
 					break;
 				case 2:
 					removeFavoriteContact();	//Not finished
@@ -112,32 +113,44 @@ public class Main1 {
 					switchFavoriteSpeedDialNumber();	//Not finished
 					break;
 				case 4:
-					displayFavorite();
+					displayFavorite(myPhoneBook);
 					break;
 				}
 				break;
 			////////////////////////////////////////////////////////////
 			//Access Phone book
 			case 4:
-				System.out.println("1.Add a contact.\n2.Remove a contact\n3.Display the phonebook.");
+				System.out.println("1.Add a contact.\n2.Remove a contact\n3.Display the phone book.");
 				int response4 = scan.nextInt();
 				scan.nextLine();
 				switch(response4){
 					case 1:
-						addContact();
+						addContact(myPhoneBook);
 						break;
 					case 2:
 						removeContact();	//Not finished
 						break;
 					case 3:
-						displayPhoneBook();
+						displayPhoneBook(myPhoneBook);
 						break;
 				}
 				break;
 			////////////////////////////////////////////////////////////
 			//Access Call History
 			case 5:
-				history.displayCallLog();
+				System.out.println("1.Display Call Log.\n2.View Call Details.");
+				int response5 = scan.nextInt();
+				scan.nextLine();
+				switch(response5) {
+					case 1:
+						myCallHistory.displayCallLog();
+						break;
+					case 2:
+						System.out.println("Enter caller assigned number");
+						String userInput = scan.nextLine();
+						// if (userInput.equals())
+						break;
+				}
 				break;
 			////////////////////////////////////////////////////////////
 			//End program
@@ -159,12 +172,12 @@ public class Main1 {
 		System.out.println("6.End the program");
 	}
 
-	public static void callByNumber() {
-		CallHistory myCallHistory = new CallHistory();
+	public static void callByNumber(PhoneBook myPhoneBook, CallHistory myCallHistory) {
+		// CallHistory myCallHistory = new CallHistory();
 		// PhoneCall myPhoneCall = new PhoneCall();
 		String again1 = "";
 		while (!again1.equals("done")){
-			PhoneCall myPhoneCall = new PhoneCall();
+			PhoneCall recordedPhoneCall = new PhoneCall();
 			boolean numValid = false;
 			System.out.println("What is the number you would like to call");
 			String number = scan.nextLine();
@@ -172,14 +185,10 @@ public class Main1 {
 				System.out.println("Phone number is invalid, please enter a valid phone number.");
 				number = scan.nextLine();
 			}
-		for(int a = 0; a < PhoneBook.getContactSize(); a++){
-			if (number.equals(PhoneBook.getContactArrayList().get(a).getNumber())){
-				System.out.println("You called " + PhoneBook.getContactArrayList().get(a).getName());
-				PhoneCall recordedPhoneCall = new PhoneCall(PhoneBook.getContactArrayList().get(a), myPhoneCall.getTimestamp(), true);
-				// System.out.println("Swag");
-				// System.out.println(recordedPhoneCall.getContact());
-				// System.out.println(recordedPhoneCall.getTimestamp());
-				// System.out.println(recordedPhoneCall.getIsIncoming());
+		for(int a = 0; a < myPhoneBook.getContactSize(); a++){
+			if (number.equals(myPhoneBook.getContactArrayList().get(a).getNumber())){
+				System.out.println("You called " + myPhoneBook.getContactArrayList().get(a).getName());
+				recordedPhoneCall = new PhoneCall(myPhoneBook.getContactArrayList().get(a), recordedPhoneCall.getTimestamp(), true);
 				myCallHistory.addCall(recordedPhoneCall);
 				numValid = true;
 			}
@@ -188,20 +197,17 @@ public class Main1 {
 			System.out.println("Number is not on your contacts, but call was still made.");
 			Contact unknown = new Contact();
 			unknown.setNumber(number);
-			PhoneBook.addUnknown(unknown);
-			// myPhoneCall.setAll(unknown, myPhoneCall.getTimestamp(), true);
-			// System.out.println(myPhoneCall.getContact());
-			// System.out.println(myPhoneCall.getTimestamp());
-			// System.out.println(myPhoneCall.getIsIncoming());
-			// myCallHistory.addCall(unknown);
-			//PhoneBook.unknownToString(); // Testing unknown arraylist
+			myPhoneBook.addUnknown(unknown);
+			recordedPhoneCall = new PhoneCall(unknown, recordedPhoneCall.getTimestamp(), true);
+			myCallHistory.addCall(recordedPhoneCall);
+			//myPhoneBook.unknownToString(); // Testing unknown arraylist
 		}
 		System.out.println("Do you want to call another number? (add/done)");
 		again1 = scan.nextLine();
 		}
 	}
 
-	public static void callByName() {
+	public static void callByName(PhoneBook myPhoneBook, CallHistory myCallHistory) {
 		String name = " ";
 		String userInput = " ";
 		boolean again = true;
@@ -209,11 +215,14 @@ public class Main1 {
 		boolean nameValid = true;
 		while (again == true) {
 			while(again2 == true){
+				PhoneCall recordedPhoneCall = new PhoneCall();
 				System.out.println("What is name of the person you would like to call?");
 				name = scan.nextLine();
-				for(int a = 0; a < PhoneBook.getContactSize(); a++){
-					if (name.equals(PhoneBook.getContactArrayList().get(a).getName())){
-						System.out.println("You called " + PhoneBook.getContactArrayList().get(a).getName());
+				for(int a = 0; a < myPhoneBook.getContactSize(); a++){
+					if (name.equals(myPhoneBook.getContactArrayList().get(a).getName())){
+						System.out.println("You called " + myPhoneBook.getContactArrayList().get(a).getName());
+						recordedPhoneCall = new PhoneCall(myPhoneBook.getContactArrayList().get(a), recordedPhoneCall.getTimestamp(), true);
+						myCallHistory.addCall(recordedPhoneCall);
 						nameValid = true;
 						again2 = false;
 					}
@@ -222,7 +231,7 @@ public class Main1 {
 					// }
 				}
 				if (nameValid == false){
-					System.out.println("You didn't enter a correct name in your phonebook.");
+					System.out.println("You didn't enter a correct name in your myPhoneBook.");
 					System.out.println("Would you like to reenter the name or return to menu?(add/done)");
 					userInput = scan.nextLine();
 					if (userInput.equals("done")) {
@@ -246,7 +255,7 @@ public class Main1 {
 		int speedDial = Integer.parseInt(scan.nextLine());		
 	}
 
-	public static void receiveCall() {
+	public static void receiveCall(PhoneBook myPhoneBook, CallHistory myCallHistory) {
 		String userInput = " ";
 		boolean again3 = true;
 		boolean again4 = true;
@@ -262,6 +271,12 @@ public class Main1 {
 			randomNumber = (int) (Math.random() * 999999999);
 			String secondNumber = Integer.toString(randomNumber);
 			secondNumber = secondNumber.substring(0,4);
+			String entireNumber = areaCode+firstNumber+secondNumber;
+
+			Contact unknown = new Contact();
+			unknown.setNumber(entireNumber);
+			myPhoneBook.addUnknown(unknown);
+			PhoneCall recordedPhoneCall = new PhoneCall();
 
 			while(again4 == true){
 				System.out.println("Ring Ring Ring.........\nYou are getting a call from " + "(" + areaCode + ")" + firstNumber + "-" + secondNumber);
@@ -270,11 +285,17 @@ public class Main1 {
 
 				if(userInput.equalsIgnoreCase("y")){
 					System.out.println("You picked up, Call was recorded.");
+					recordedPhoneCall = new PhoneCall(unknown, recordedPhoneCall.getTimestamp(), false);
+					myCallHistory.addCall(recordedPhoneCall);
 					again4 = false;
-				} else if(userInput.equalsIgnoreCase("n")){
+				} 
+				else if(userInput.equalsIgnoreCase("n")){
 					System.out.println("You declined the call.");
+					recordedPhoneCall = new PhoneCall(unknown, recordedPhoneCall.getTimestamp(), false);
+					myCallHistory.addCall(recordedPhoneCall);
 					again4 = false;
-				} else {
+				} 
+				else {
 					System.out.println("Enter a valid command.");
 					userInput = scan.nextLine();
 				}
@@ -289,7 +310,7 @@ public class Main1 {
 		}
 	}
 
-	public static void addFavoriteContact() {
+	public static void addFavoriteContact(PhoneBook myPhoneBook) {
 		String again = "";
 		while(!again.equals("done")){
 				System.out.println("Enter the name of the favorite contact");
@@ -318,7 +339,7 @@ public class Main1 {
 			int imageHeight = Integer.parseInt(scan.nextLine());
 			FavoriteContactFrame contactFrame = new FavoriteContactFrame(path,imageWidth,imageHeight);
 			Favorite favFavorite = new Favorite(favContact, favSpeedDial, contactFrame);
-			PhoneBook.addFavorite(favFavorite);
+			myPhoneBook.addFavorite(favFavorite);
 			System.out.println("Do you want to add another favorite? (add/done)");
 			again = scan.nextLine();
 		}
@@ -332,17 +353,17 @@ public class Main1 {
 		//Empty
 	}
 
-	public static void displayFavorite() {
+	public static void displayFavorite(PhoneBook myPhoneBook) {
 		System.out.println("Which favorites information do you want displayed");
 		int answer1 = Integer.parseInt(scan.nextLine());
-		for (int i = 0; i < PhoneBook.getFavoriteSize(); i++) {
-			if (answer1 == PhoneBook.getFavoriteArrayList().get(i).getSpeedDial()) {
-				PhoneBook.getFavoriteArrayList().get(i).getContactFrame().displayContactImage(PhoneBook.getFavoriteArrayList().get(i).getName());;
+		for (int i = 0; i < myPhoneBook.getFavoriteSize(); i++) {
+			if (answer1 == myPhoneBook.getFavoriteArrayList().get(i).getSpeedDial()) {
+				myPhoneBook.getFavoriteArrayList().get(i).getContactFrame().displayContactImage(myPhoneBook.getFavoriteArrayList().get(i).getName());;
 			}
 		}
 	}
 
-	public static void addContact() {
+	public static void addContact(PhoneBook myPhoneBook) {
 		String again = "";
 		while (!again.equals("done")) {
 			Contact userContact = new Contact();
@@ -356,8 +377,8 @@ public class Main1 {
 			}
 			System.out.println("Please enter any notes");
 			userContact.setNotes(scan.nextLine());
-			PhoneBook.addContact(userContact);
-			PhoneBook.contactsToString();    //Checking arraylist
+			myPhoneBook.addContact(userContact);
+			myPhoneBook.contactsToString();    //Checking arraylist
 			System.out.println("Do you want to add another contact? (add/done)");
 			again = scan.nextLine();
 		}
@@ -367,11 +388,11 @@ public class Main1 {
 		//Empty
 	}
 
-	public static void displayPhoneBook() {
-		PhoneBook.compareContacts();
+	public static void displayPhoneBook(PhoneBook myPhoneBook) {
+		myPhoneBook.compareContacts();
 		System.out.println("Your Phone book.");
 		System.out.println("-------------------------------------");
-		PhoneBook.contactsToString();
+		myPhoneBook.contactsToString();
 		System.out.println("Would you like to call one of your contacts? (y/n)");
 		String answer3 = scan.nextLine();
 	}
