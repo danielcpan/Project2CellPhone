@@ -66,8 +66,6 @@ public class Main1 {
 		//Menus System of the phone, with 5 options
 		boolean end = false;
 		while (!end){
-<<<<<<< Updated upstream
-=======
 			displayMenu();
 			int response = scan.nextInt();
 			// scan.nextLine();
@@ -182,7 +180,6 @@ public class Main1 {
 
 	}
 	public static void displayMenu() {
->>>>>>> Stashed changes
 		System.out.println("Phone Menu");
 		System.out.println("--------------------");
 		System.out.println("1.Make a call.");
