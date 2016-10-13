@@ -66,6 +66,123 @@ public class Main1 {
 		//Menus System of the phone, with 5 options
 		boolean end = false;
 		while (!end){
+<<<<<<< Updated upstream
+=======
+			displayMenu();
+			int response = scan.nextInt();
+			// scan.nextLine();
+			switch(response){
+			///////////////////////////////////////////////
+			//Make a call
+			case 1: 
+				System.out.println("1.Call by number\n2.Call by name\n3.Call from favorites");
+				int response1 = scan.nextInt();
+				scan.nextLine();
+				switch(response1) {
+				case 1:
+					callByNumber(myPhoneBook, myCallHistory);
+					break;
+				case 2:
+					callByName(myPhoneBook, myCallHistory);
+					break;
+				case 3:
+					callFromFavorites();	//Not Finished
+					break;
+				}
+				break;
+			//////////////////////////////////////////////////////////
+			//Receive a call	
+			case 2:
+				receiveCall(myPhoneBook, myCallHistory);
+				break;
+			////////////////////////////////////////////////////////////
+			//Access Top 5
+			case 3:
+				System.out.println("1.Add a favorite.\n2.Remove a favorite.\n3.Switch numbers of two favorites.\n4.Display a favorite.");
+				int response3 = scan.nextInt();
+				scan.nextLine();
+				switch (response3){
+				case 1:
+					addFavoriteContact(myPhoneBook);
+					break;
+				case 2:
+					removeFavoriteContact();	//Not finished
+					break;
+				case 3:
+					switchFavoriteSpeedDialNumber();	//Not finished
+					break;
+				case 4:
+					displayFavorite(myPhoneBook);
+					break;
+				}
+				break;
+			////////////////////////////////////////////////////////////
+			//Access Phone book
+			case 4:
+				System.out.println("1.Add a contact.\n2.Remove a contact\n3.Display the phone book.");
+				int response4 = scan.nextInt();
+				scan.nextLine();
+				switch(response4){
+					case 1:
+						addContact(myPhoneBook);
+						break;
+					case 2:
+						removeContact();	//Not finished
+						break;
+					case 3:
+						displayPhoneBook(myPhoneBook);
+						break;
+				}
+				break;
+			////////////////////////////////////////////////////////////
+			//Access Call History
+			case 5:
+			myCallHistory.displayCallLog();
+			boolean again7 = true;
+			while (again7 == true) {
+				System.out.println("Would you like to view call details? (y/n)");
+				String response5 = scan.nextLine();
+				if (response5.equals("y")) {
+					System.out.println("Please enter caller assigned number");
+					String response6 = scan.nextLine();
+					myCallHistory.displayHiddenLog(Integer.parseInt(response6));
+					again7 = false;
+				}
+				else if (response5.equals("n")) {
+					again7 = false;
+				}
+				else {
+					System.out.println("Test");
+				}
+			}
+
+				// System.out.println("1.Display Call Log.\n2.View Call Details.");
+				// int response5 = scan.nextInt();
+				// scan.nextLine();
+				// switch(response5) {
+				// 	case 1:
+				// 		myCallHistory.displayCallLog();
+				// 		break;
+				// 	case 2:
+				// 		System.out.println("Enter caller assigned number");
+				// 		int userInput = scan.nextInt();
+				// 		scan.nextLine();
+				// 		myCallHistory.displayHiddenLog(userInput);
+				// 		// if (userInput.equals())
+				// 		break;
+				// }
+				break;
+			////////////////////////////////////////////////////////////
+			//End program
+			default:
+				end = true;
+				break;
+		}
+		}	
+
+	}
+	public static void displayMenu() {
+>>>>>>> Stashed changes
 		System.out.println("Phone Menu");
 		System.out.println("--------------------");
 		System.out.println("1.Make a call.");
