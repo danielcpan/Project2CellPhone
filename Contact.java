@@ -5,27 +5,29 @@ public class Contact {
 	private static final String DEFAULT_NOTES = "";
 
 	String name;
-	String cellNumber;
+	String number;
 	String notes;
 
 	public Contact() {
-		this.setName(DEFAULT_NAME);
-		this.setNumber(DEFAULT_NUMBER);
-		this.setNotes(DEFAULT_NOTES);
+		this.setAll(DEFAULT_NAME, DEFAULT_NUMBER, DEFAULT_NOTES);
 	}
 
-	public Contact(String name, String cellNumber, String notes) {
+	public Contact(String name, String number, String notes) {
+		this.setAll(name, number, notes);
+	}
+	
+	public Contact(Contact other)
+	{
+		this.setAll(other.name, other.number, other.notes);
+	}
+
+	public void setAll(String name, String number, String notes)
+	{
 		this.setName(name);
-		this.setNumber(cellNumber);
+		this.setNumber(number);
 		this.setNotes(notes);
 	}
-
-	public Contact(String name, String cellNumber, String notes, String favorite) {
-		this.setName(name);
-		this.setNumber(cellNumber);
-		this.setNotes(notes);
-	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -34,12 +36,12 @@ public class Contact {
 		return this.name;
 	}
 
-	public void setNumber(String cellNumber) {
-		this.cellNumber = cellNumber;
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getNumber() {
-		return this.cellNumber;
+		return this.number;
 	}
 
 	public void setNotes(String notes) {
@@ -49,13 +51,5 @@ public class Contact {
 	public String getNotes() {
 		return this.notes;
 	}
-	/*public String toStringName(){
-		return this.name;
-	}
-	public String toStringNumber(){
-		return this.cellNumber;
-	}
-	public String toStringNotes(){
-		return this.notes;
-	}*/
+
 }

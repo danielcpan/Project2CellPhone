@@ -1,26 +1,35 @@
 public class Favorite extends Contact {
 
-
-
+	public static final int DEFAULT_SPEEDDIAL = 10;
 	private int speedDial;
-	private String directory;
-	private int width;
-	private int height;
 	private FavoriteContactFrame contactframe;
 	
-
-	public Favorite(String favName, String favNumber, String favNotes, int speedDial,String directory, int fWidth, int fHeight) {
-		super(favName, favNumber, favNotes);
+	public Favorite(String name, String number, String notes, int speedDial, String directory, int fWidth, int fHeight) {
+		super(name, number, notes);
 		this.setSpeedDial(speedDial);
 		this.contactframe = new FavoriteContactFrame(directory,fWidth,fHeight);
-		this.contactframe.setNameInfo(favName);
-		this.contactframe.setNumberInfo(favNumber);
-		this.contactframe.setNoteInfo(favNotes);
-		
+		this.contactframe.setNameInfo(name);
+		this.contactframe.setNumberInfo(number);
+		this.contactframe.setNotesInfo(notes);
 	}
+	
 	public Favorite(Favorite userFavorite){
 		super(userFavorite.getName(),userFavorite.getNumber(),userFavorite.getNotes());
 		this.setSpeedDial(userFavorite.getSpeedDial());
+	}
+	
+	public Favorite(String name, String number, String notes, int speedDial)
+	{
+		super(name, number, notes);
+		this.setSpeedDial(speedDial);
+		this.setContactFrame();
+	}
+	
+	public Favorite()
+	{
+		super();
+		this.setSpeedDial(DEFAULT_SPEEDDIAL);
+		this.setContactFrame();
 	}
 
 	public void setSpeedDial(int speedDial) {
@@ -28,38 +37,20 @@ public class Favorite extends Contact {
 	}
 
 	public int getSpeedDial() {
-		return speedDial;
+		return this.speedDial;
 	}
+	
 	public void setContactFrame(FavoriteContactFrame contactframe){
-		this.contactframe = contactframe;
+		this.contactframe = new FavoriteContactFrame(contactframe);
+	}
+	
+	public void setContactFrame()
+	{
+		this.contactframe = new FavoriteContactFrame();
 	}
 	
 	public FavoriteContactFrame getContactFrame(){
-		return contactframe;
-	}
-	
-	public String getDirectory(){
-		return directory;
-	}
-	public void setDirectory(String path){
-		this.directory = path;
-	}
-	public int getWidth(){
-		return width;
-	}
-	public void setWidth(int width){
-		this.width = width;
-	}
-	public int getHeight(){
-		return height;
-	}
-	public void setHeight(int height){
-		this.height = height;
-	}
-	
-	
-	public void setAll() {
-
+		return this.contactframe;
 	}
 
 }
