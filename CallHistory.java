@@ -8,7 +8,6 @@ public class CallHistory {
 	// private static ArrayList<Contact> log = new ArrayList<Contact>();
 
 	public CallHistory() {
-
 	}
 
 	public void addCall(PhoneCall contact) {
