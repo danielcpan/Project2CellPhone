@@ -34,17 +34,22 @@ public class CallHistory {
 			checkNumberOfCalls();
 			System.out.println("Call History");
 			System.out.println("--------------------");
+			//String formatContact;
 			for (int i = 0; i < log.size(); i++) {
 				if (log.get(i).getIndex()!=log.get(i+1).getIndex()) {
 					if (log.get(i).getNumberOfCalls() > 1) {
 						if (log.get(i).getContact().getName().equals("UNKNOWN")) {
-							System.out.println(i+1 + "." + "|Number: " + log.get(i).getContact().getNumber() + " (" + log.get(i).getNumberOfCalls() + ")");
+							System.out.println(i+1 + "." + "|Number: " + log.get(i).getContact().getNumber() + "(" + log.get(i).getNumberOfCalls() + ")");
 							System.out.println("--------------------");
+//							formatContact = String.format("%-13s%7s", log.get(i).getContact().getNumber(),"(" + log.get(i).getNumberOfCalls() + ")");
+//							displayLog.add(formatContact);
 						}
 						else {
-							System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName() + " (" + log.get(i).getNumberOfCalls() + ")");
+							System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName() + "(" + log.get(i).getNumberOfCalls() + ")");
 							System.out.println("  |Number: " + log.get(i).getContact().getNumber());
 							System.out.println("--------------------");
+//							formatContact = String.format("%-10s%5s", log.get(i).getContact().getName(),"(" + log.get(i).getNumberOfCalls() + ")");
+//							displayLog.add(formatContact);
 						}
 					}
 					else if (log.get(i).getNumberOfCalls() == 1) {
@@ -54,6 +59,8 @@ public class CallHistory {
 							System.out.println("  |Date: " + log.get(i).getDatestamp());
 							System.out.println("  |Status: " + log.get(i).getPhoneStatus());
 							System.out.println("--------------------");
+//							formatContact = String.format("%-13s%12s\n%-10s%8s", log.get(i).getContact().getNumber(),log.get(i).getPhoneStatus(),log.get(i).getDatestamp(),log.get(i).getTimestamp());
+//							displayLog.add(formatContact);
 						}
 						else {
 							System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName());
@@ -62,6 +69,8 @@ public class CallHistory {
 							System.out.println("  |Date: " + log.get(i).getDatestamp());
 							System.out.println("  |Status: " + log.get(i).getPhoneStatus());
 							System.out.println("--------------------");
+//							formatContact = String.format("%-10s%11s\n%-10s%8s", log.get(i).getContact().getName(),log.get(i).getPhoneStatus(),log.get(i).getDatestamp(),log.get(i).getTimestamp());
+//							displayLog.add(formatContact);
 						}
 					}
 				}
