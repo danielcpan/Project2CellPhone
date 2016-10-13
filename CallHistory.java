@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class CallHistory {
 
 	private ArrayList<PhoneCall> log = new ArrayList<PhoneCall>();
@@ -8,6 +11,7 @@ public class CallHistory {
 	// private static ArrayList<Contact> log = new ArrayList<Contact>();
 
 	public CallHistory() {
+
 	}
 
 	public void addCall(PhoneCall contact) {

@@ -3,11 +3,10 @@ public class Contact {
 	private static final String DEFAULT_NAME = "UNKNOWN";
 	private static final String DEFAULT_NUMBER = "";
 	private static final String DEFAULT_NOTES = "";
-	private static final String DEFAULT_FAVORITE = "";
 
-	private String name;
-	private String cellNumber;
-	private String notes;
+	String name;
+	String cellNumber;
+	String notes;
 
 	public Contact() {
 		this.setName(DEFAULT_NAME);
@@ -50,5 +49,13 @@ public class Contact {
 	public String getNotes() {
 		return this.notes;
 	}
-
+	/*public String toStringName(){
+		return this.name;
+	}
+	public String toStringNumber(){
+		return this.cellNumber;
+	}
+	public String toStringNotes(){
+		return this.notes;
+	}*/
 }
