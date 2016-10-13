@@ -1,6 +1,3 @@
-package edu.project_2;
-
-
 import java.awt.*;
 import javax.swing.*;
 
@@ -11,14 +8,13 @@ import javax.swing.*;
 */
 public class FavoriteContactFrame extends JPanel{
 	
+	public static final String DEFAULT_DIRECTORY = "DEFAULT PATH IDK";
 	private Image image; // Declare a name for our Image object.
 	private Image background1;
-	//private Image background2;
-	//private Image background3;
 	private Dimension window;  //Declare the dimensions of the window.
-	private String infoName;
-	private String infoNumber;
-	private String infoNotes;
+	private String nameInfo;
+	private String numberInfo;
+	private String notesInfo;
 	
 
 	/**
@@ -43,6 +39,16 @@ public class FavoriteContactFrame extends JPanel{
 		   background1 = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
 	}
 
+	public FavoriteContactFrame(FavoriteContactFrame other)
+	{
+		super();
+		this.image = Toolkit.getDefaultToolkit().getImage(DEFAULT_DIRECTORY);
+		this.background1 = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
+		this.window = new Dimension(other.window);
+		this.setNameInfo(other.nameInfo);
+		this.setNumberInfo(other.numberInfo);
+		this.setNotesInfo(other.notesInfo);
+	}
 
 
 	/** 
@@ -75,17 +81,17 @@ public class FavoriteContactFrame extends JPanel{
 		  g.drawString("Name:",(int) window.getWidth()/2 + 40, 100);
 		  g.fillRect((int) window.getWidth()/2 + 40, 105, 150, 5);
 		  g.setFont(information);
-		  g.drawString(infoName, (int) window.getWidth()/2 + 60, 200 );
+		  g.drawString(nameInfo, (int) window.getWidth()/2 + 60, 200 );
 		  g.setFont(title);
 		  g.drawString("Number:", (int) window.getWidth()/2 + 40, 300);
 		  g.fillRect((int) window.getWidth()/2 + 40, 305, 200, 5);
 		  g.setFont(information);
-		  g.drawString(infoNumber, (int) window.getWidth()/2 + 60, 400);
+		  g.drawString(numberInfo, (int) window.getWidth()/2 + 60, 400);
 		  g.setFont(title);
 		  g.drawString("Notes:", 10, (int) window.getHeight() - 100);
 		  g.fillRect((int) 10, (int) window.getHeight() - 95, 150, 5);
 		  g.setFont(information);
-		  g.drawString(infoNotes, 185, (int) window.getHeight() - 100); 
+		  g.drawString(notesInfo, 185, (int) window.getHeight() - 100); 
 		  
 	 }
 	
@@ -137,14 +143,14 @@ public class FavoriteContactFrame extends JPanel{
 	  int new_height = (int)windowSize.getHeight();
 	  return new Dimension(new_width, new_height); 
   }
-  public void setNameInfo(String info){
-	  this.infoName = info;
+  public void setNameInfo(String nameInfo){
+	  this.nameInfo = nameInfo;
   }
-  public void setNumberInfo(String info){
-	  this.infoNumber = info;
+  public void setNumberInfo(String numberInfo){
+	  this.numberInfo = numberInfo;
   }
-  public void setNoteInfo(String info){
-	  this.infoNotes = info;
+  public void setNotesInfo(String notesInfo){
+	  this.notesInfo = notesInfo;
   }
 
   /*public static void main(String arg[]){
