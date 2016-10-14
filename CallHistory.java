@@ -2,13 +2,29 @@ import java.util.ArrayList;
 
 public class CallHistory {
 
-	private ArrayList<PhoneCall> log = new ArrayList<PhoneCall>();
-	private ArrayList<PhoneCall> hiddenLog = new ArrayList<PhoneCall>();
+	private ArrayList<PhoneCall> log;
+	private ArrayList<PhoneCall> hiddenLog;
 
 	public CallHistory() {
-
+		this.log = new ArrayList<PhoneCall>();
+		this.hiddenLog = new ArrayList<PhoneCall>();
 	}
 
+	public CallHistory(CallHistory other)
+	{
+		this.log = new ArrayList<PhoneCall>();
+		this.hiddenLog = new ArrayList<PhoneCall>();
+		
+		for (int i = 0; i < other.log.size(); i++)
+		{
+			this.log.add(new PhoneCall(other.log.get(i)));
+		}
+		
+		for (int i = 0; i < other.hiddenLog.size(); i++)
+		{
+			this.hiddenLog.add(new PhoneCall(other.hiddenLog.get(i)));
+		}
+	}
 	public void addCall(PhoneCall contact) {
 		log.add(contact);
 	}
