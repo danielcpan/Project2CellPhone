@@ -108,19 +108,24 @@ public class Main1 {
 			////////////////////////////////////////////////////////////
 			//Access Call History
 			case 5:
-				System.out.println("1.Display Call Log.\n2.View Call Details.");
-				int response5 = Integer.parseInt(scan.nextLine());
-				switch(response5) {
-					case 1:
-						myCallHistory.displayCallLog();
-						break;
-					case 2:
-						System.out.println("Enter caller assigned number");
-						String userInput = scan.nextLine();
-						// if (userInput.equals())
-						break;
+				myCallHistory.displayCallLog();
+				boolean again7 = true;
+				while (again7 == true) {
+					System.out.println("Would you like to view call details? (y/n)");
+					String response5 = scan.nextLine();
+					if (response5.equals("y")) {
+						System.out.println("Please enter caller assigned number");
+						String response6 = scan.nextLine();
+						myCallHistory.displayHiddenLog(Integer.parseInt(response6));
+						again7 = false;
+					}
+					else if (response5.equals("n")) {
+						again7 = false;
+					}
+					else {
+						System.out.println("Test");
+					}
 				}
-				break;
 			////////////////////////////////////////////////////////////
 			//End program
 			default:
@@ -415,7 +420,6 @@ public class Main1 {
 						myPhoneBook.removeFavorite(myPhoneBook.getFavoriteArrayList().get(a));
 					}
 				}
-				
 				
 				System.out.println("Enter the name of the favorite contact");
 				String favName = scan.nextLine();
@@ -718,40 +722,39 @@ public class Main1 {
 		boolean again = true;
 		boolean again2 = true;
 	
-	while(again == true){
-		while(again2 == true){
-		System.out.println("Name the contact you want to remove?");
-		userInput = scan.nextLine();
-		for(int a = 0; a < myPhoneBook.getContactSize(); a++){
-			if(userInput.equals(myPhoneBook.getContactArrayList().get(a).getName())){
-				System.out.println("You have removed " + myPhoneBook.getContactArrayList().get(a).getName() + " off of the contacts list." );
-				myPhoneBook.removeContact(myPhoneBook.getContactArrayList().get(a));
-				validContact = true;
-				again2 = false;
-			}
-		}
-			if(validContact == false){
-				System.out.println("You did not name a valid contact name. Would you like to reenter the name? (add/done)");
+		while(again == true){
+			while(again2 == true){
+				System.out.println("Name the contact you want to remove?");
 				userInput = scan.nextLine();
-				if(userInput.equals("done")){
-					again2 = false;
+				for(int a = 0; a < myPhoneBook.getContactSize(); a++){
+					if(userInput.equals(myPhoneBook.getContactArrayList().get(a).getName())){
+						System.out.println("You have removed " + myPhoneBook.getContactArrayList().get(a).getName() + " off of the contacts list." );
+						myPhoneBook.removeContact(myPhoneBook.getContactArrayList().get(a));
+						validContact = true;
+						again2 = false;
 					}
-				else if(userInput.equals("add")){
-					again2 = true;
 				}
+				if(validContact == false){
+					System.out.println("You did not name a valid contact name. Would you like to reenter the name? (add/done)");
+					userInput = scan.nextLine();
+					if(userInput.equals("done")){
+						again2 = false;
+						}
+					else if(userInput.equals("add")){
+						again2 = true;
+					}
 				}
-		
-		}
-		System.out.println("Do you want to remove another contact? (add/done)");
-		userInput = scan.nextLine();
-		if(userInput.equals("done")){
-			again = false;
-		}
-		else if(userInput.equals("add")){
-			again = true;
-		}
-		
-		}
+			}
+			System.out.println("Do you want to remove another contact? (add/done)");
+			userInput = scan.nextLine();
+			if(userInput.equals("done")){
+				again = false;
+			}
+			else if(userInput.equals("add")){
+				again = true;
+			}
+			
+			}
 		
 	}
 
