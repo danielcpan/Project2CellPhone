@@ -13,10 +13,7 @@ public class PhoneCall {
 	public PhoneCall() {
 
 	}
-	// public PhoneCall(Contact contact, boolean phoneStatus) {
-	// 	this.calcTimestamp();
-	// 	this.setAll(contact, this.getTimestamp(), phoneStatus);
-	// }
+	
 	public PhoneCall(Contact contact, String timestamp, boolean phoneStatus) {
 		this.calcTimestamp();
 		this.calcDateStamp();

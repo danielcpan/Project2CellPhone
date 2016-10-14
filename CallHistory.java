@@ -1,14 +1,9 @@
-import java.util.Scanner;
 import java.util.ArrayList;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class CallHistory {
 
 	private ArrayList<PhoneCall> log = new ArrayList<PhoneCall>();
-	private ArrayList<String> displayLog = new ArrayList<String>();
-	// private static ArrayList<Contact> log = new ArrayList<Contact>();
+	private ArrayList<PhoneCall> hiddenLog = new ArrayList<PhoneCall>();
 
 	public CallHistory() {
 
@@ -18,65 +13,66 @@ public class CallHistory {
 		log.add(contact);
 	}
 
-	public void displayLogTest() {
-		for (int i = 0; i < log.size(); i++) {
-			System.out.println(log.get(i));
-		}
-	}
 	public void displayCallLog() {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Ener 1 for Raw Call Log or Enter 2 for formatted Call Log (TESTING STUFF SHUSSSH)");
-		String userInput = scan.nextLine();
-		if (userInput.equals("1")) {
-			displayLogTest();
-		}
-		else if (userInput.equals("2")) {
-			checkNumberOfCalls();
-			System.out.println("Call History");
-			System.out.println("--------------------");
-			//String formatContact;
-			for (int i = 0; i < log.size(); i++) {
-				if (log.get(i).getIndex()!=log.get(i+1).getIndex()) {
-					if (log.get(i).getNumberOfCalls() > 1) {
-						if (log.get(i).getContact().getName().equals("UNKNOWN")) {
-							System.out.println(i+1 + "." + "|Number: " + log.get(i).getContact().getNumber() + "(" + log.get(i).getNumberOfCalls() + ")");
-							System.out.println("--------------------");
-//							formatContact = String.format("%-13s%7s", log.get(i).getContact().getNumber(),"(" + log.get(i).getNumberOfCalls() + ")");
-//							displayLog.add(formatContact);
-						}
-						else {
-							System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName() + "(" + log.get(i).getNumberOfCalls() + ")");
-							System.out.println("  |Number: " + log.get(i).getContact().getNumber());
-							System.out.println("--------------------");
-//							formatContact = String.format("%-10s%5s", log.get(i).getContact().getName(),"(" + log.get(i).getNumberOfCalls() + ")");
-//							displayLog.add(formatContact);
-						}
-					}
-					else if (log.get(i).getNumberOfCalls() == 1) {
-						if (log.get(i).getContact().getName().equals("UNKNOWN")) {
-							System.out.println(i+1 + "." + "|Number: " + log.get(i).getContact().getNumber());
-							System.out.println("  |Time: " + log.get(i).getTimestamp());
-							System.out.println("  |Date: " + log.get(i).getDatestamp());
-							System.out.println("  |Status: " + log.get(i).getPhoneStatus());
-							System.out.println("--------------------");
-//							formatContact = String.format("%-13s%12s\n%-10s%8s", log.get(i).getContact().getNumber(),log.get(i).getPhoneStatus(),log.get(i).getDatestamp(),log.get(i).getTimestamp());
-//							displayLog.add(formatContact);
-						}
-						else {
-							System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName());
-							System.out.println("  |Number: " + log.get(i).getContact().getNumber());
-							System.out.println("  |Time: " + log.get(i).getTimestamp());
-							System.out.println("  |Date: " + log.get(i).getDatestamp());
-							System.out.println("  |Status: " + log.get(i).getPhoneStatus());
-							System.out.println("--------------------");
-//							formatContact = String.format("%-10s%11s\n%-10s%8s", log.get(i).getContact().getName(),log.get(i).getPhoneStatus(),log.get(i).getDatestamp(),log.get(i).getTimestamp());
-//							displayLog.add(formatContact);
-						}
-					}
+		checkNumberOfCalls();
+		System.out.println("Call History");
+		System.out.println("--------------------");
+		for (int i = 0; i < log.size(); i++) {
+			if ((log.get(i).getNumberOfCalls() > 1)) {
+				if (log.get(i).getContact().getName().equals("UNKNOWN")) {
+					System.out.println(i+1 + "." + "|Number: " + log.get(i).getContact().getNumber() + " (" + log.get(i).getNumberOfCalls() + ")");
 				}
+				else {
+					System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName() + " (" + log.get(i).getNumberOfCalls() + ")");
+					System.out.println("  |Number: " + log.get(i).getContact().getNumber());
+				}
+				System.out.println("--------------------");
+			}
+			else if ((log.get(i).getNumberOfCalls() == 1)) {
+				if (log.get(i).getContact().getName().equals("UNKNOWN")) {
+					System.out.println(i+1 + "." + "|Number: " + log.get(i).getContact().getNumber());
+					System.out.println("  |Time: " + log.get(i).getTimestamp());
+					System.out.println("  |Date: " + log.get(i).getDatestamp());
+					System.out.println("  |Status: " + log.get(i).getPhoneStatus());
+				}
+				else {
+					System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName());
+					System.out.println("  |Number: " + log.get(i).getContact().getNumber());
+					System.out.println("  |Time: " + log.get(i).getTimestamp());
+					System.out.println("  |Date: " + log.get(i).getDatestamp());
+					System.out.println("  |Status: " + log.get(i).getPhoneStatus());
+				}
+				System.out.println("--------------------");
 			}
 		}
 	}
+
+	public void displayHiddenLog(int index) {
+		int count = 0;
+		for (int i = 0; i < log.size(); i ++) {
+			if (log.get(i).getIndex()==index) {
+				count++;
+				System.out.println(count + "." + "|Name: " + log.get(i).getContact().getName());
+				System.out.println("  |Number: " + log.get(i).getContact().getNumber());
+				System.out.println("  |Time: " + log.get(i).getTimestamp());
+				System.out.println("  |Date: " + log.get(i).getDatestamp());
+				System.out.println("  |Status: " + log.get(i).getPhoneStatus());
+				System.out.println("--------------------");
+			}
+		}
+		for (int j = 0; j < hiddenLog.size(); j++) {
+			if (hiddenLog.get(j).getIndex()==index) {
+				count++;
+				System.out.println(count + "." + "|Name: " + hiddenLog.get(j).getContact().getName());
+				System.out.println("  |Number: " + hiddenLog.get(j).getContact().getNumber());
+				System.out.println("  |Time: " + hiddenLog.get(j).getTimestamp());
+				System.out.println("  |Date: " + hiddenLog.get(j).getDatestamp());
+				System.out.println("  |Status: " + hiddenLog.get(j).getPhoneStatus());
+				System.out.println("--------------------");				
+			}
+		}
+	}
+
 	public void checkNumberOfCalls() {
 		int numberOfCalls;
 		for (int i = 0; i < log.size(); i++) {
@@ -87,8 +83,10 @@ public class CallHistory {
 					numberOfCalls = log.get(i).getNumberOfCalls();
 					numberOfCalls++;
 					log.get(i).setNumberOfCalls(numberOfCalls);
-					log.get(i).setIndex(i);
-					log.get(j).setIndex(i);
+					log.get(i).setIndex(i+1);
+					System.out.println("Index " + log.get(i).getIndex());
+					log.get(j).setIndex(log.get(i).getIndex());
+					hiddenLog.add(log.get(j));
 					log.remove(j);
 					j--;
 				}
