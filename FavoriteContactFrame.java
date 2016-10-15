@@ -16,7 +16,6 @@ public class FavoriteContactFrame extends JPanel{
 	private String numberInfo;
 	private String notesInfo;
 	
-
 	/**
 	 * Initializes the JPanel instance variables to default values and image to null
 	 * */
@@ -24,8 +23,7 @@ public class FavoriteContactFrame extends JPanel{
 		   
 		   super();  //Calling parent constructor to initialize all the instance variables in the JPanel class
 		   image = null;
-		   window = new Dimension(600, 400);  //Sets default window dimensions of 600 pixels wide X 400 pixel high
-		   
+		   window = new Dimension(600, 400);  //Sets default window dimensions of 600 pixels wide X 400 pixel high		   
 	}
 	
 	/**
@@ -49,7 +47,6 @@ public class FavoriteContactFrame extends JPanel{
 		this.setNumberInfo(other.numberInfo);
 		this.setNotesInfo(other.notesInfo);
 	}
-
 
 	/** 
 	* Overrides the one in JPanel. This is where the drawing happens. We don't have to call it in our program, it gets called
@@ -97,7 +94,8 @@ public class FavoriteContactFrame extends JPanel{
 	
 	/**
 	 * Displays the image of the this object
-	 * */
+	 * @param favContact - the favorite contact
+	 */
 	public void displayContactImage(Favorite favContact){
 		//Creating the window
 		  JFrame frame = new JFrame("Favorite Contact: " + favContact.getName());  //title of the frame will be "Favorite Contact"
@@ -138,6 +136,11 @@ public class FavoriteContactFrame extends JPanel{
 
 	    return new Dimension(new_width, new_height);
 	}
+  /**
+   * get the new dimensions of the frame
+   * @param bgSize - 
+   * @param windowSize - size of the frame
+   */
   private static Dimension getScaledDimensionBg(Dimension bgSize, Dimension windowSize) {
 	  int new_width = (int)windowSize.getWidth();
 	  int new_height = (int)windowSize.getHeight();
