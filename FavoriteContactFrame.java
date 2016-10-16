@@ -109,6 +109,18 @@ public class FavoriteContactFrame extends JPanel{
 		  frame.setVisible(true);		
 		
 	}
+	
+	public void displayContactImage(){
+		//Creating the window
+		  JFrame frame = new JFrame("Favorite Contact: " + this.getName());  //title of the frame will be "Favorite Contact"
+		  frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  //Exits the window when it is closed
+		  frame.setSize(window.width, window.height);			//Sets the window size
+		  
+		//Displaying the image in the frame
+		  frame.setContentPane(this); 
+		  frame.setVisible(true);		
+		
+	}
   
   // helper method that scales the image based on window dimensions
   private static Dimension getScaledDimension(Dimension imgSize, Dimension windowSize) {
