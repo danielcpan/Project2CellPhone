@@ -1,5 +1,3 @@
-package project2;
-
 import java.util.Scanner;
 import utilitiesVH.UtilitiesVH;
 
@@ -117,24 +115,16 @@ public class Project2
 					break;
 				case 5: //access call history
 					myPhoneBook.getCallHistory().displayCallLog();
-					System.out.println("#");
+					
 					for (int i = 0; i < myPhoneBook.getCallHistory().getPrintLog().length; i++)
 					{
-						System.out.println(myPhoneBook.getCallHistory().getNumberOfCalls()[i]);
-					}
-					System.out.println("refer to");
-					for (int i = 0; i < myPhoneBook.getCallHistory().getPrintLog().length; i++)
-					{
-						System.out.println(myPhoneBook.getCallHistory().getReferToIndex()[i]);
-					}
-					for (int i = 0; i < myPhoneBook.getCallHistory().getPrintLog().length; i++)
-					{
-						if(myPhoneBook.getCallHistory().getNumberOfCalls()[i] == 0)
+						if(myPhoneBook.getCallHistory().getNumberOfCalls()[i] != 0)
 						{
 							count++;
 						}
 					}
-					System.out.print("Enter the caller assigned number: (done to go back) ");
+					
+					System.out.print("\nEnter the caller assigned number: (done to go back) ");
 					response5 = scan.nextLine().toLowerCase();
 					
 					while (!response5.equals("done")) {
@@ -147,14 +137,14 @@ public class Project2
 							}
 							else
 							{
-								System.out.println("ERROR: enter a number between 1 and " + myPhoneBook.getCallHistory().getPrintLog().length);
+								System.out.println("ERROR: enter a number between 1 and " + count);
 							}
-							System.out.print("Enter the caller assigned number: (done to go back) ");
+							System.out.print("\nEnter the caller assigned number: (done to go back) ");
 							response5 = scan.nextLine().toLowerCase();
 						}
 						catch (NumberFormatException e)
 						{
-							System.out.print("Enter the caller assigned number: (done to go back) ");
+							System.out.print("\nEnter the caller assigned number: (done to go back) ");
 							response5 = scan.nextLine().toLowerCase();
 						}
 					}
