@@ -4,12 +4,17 @@ public class CallHistory {
 
 	private ArrayList<PhoneCall> log;
 	private ArrayList<PhoneCall> hiddenLog;
-
+	/**
+	 * default constructor
+	 */
 	public CallHistory() {
 		this.log = new ArrayList<PhoneCall>();
 		this.hiddenLog = new ArrayList<PhoneCall>();
 	}
-
+	/**
+	 * overloaded constructor that has a list of contacts
+	 * @param other - object with a given list of contacts who have called you
+	 */
 	public CallHistory(CallHistory other)
 	{
 		this.log = new ArrayList<PhoneCall>();
@@ -25,10 +30,16 @@ public class CallHistory {
 			this.hiddenLog.add(new PhoneCall(other.hiddenLog.get(i)));
 		}
 	}
+	/**
+	 * logs the call to the call history
+	 * @param contact - contact that has called you at least once
+	 */
 	public void addCall(PhoneCall contact) {
 		log.add(contact);
 	}
-
+	/**
+	 * displays the call history
+	 */
 	public void displayCallLog() {
 		checkNumberOfCalls();
 		System.out.println("Call History");
@@ -62,7 +73,10 @@ public class CallHistory {
 			}
 		}
 	}
-
+	/**
+	 * displays information of call log when number of calls is greater than 1
+	 * @param index - position of the contact in the call history (call log)
+	 */
 	public void displayHiddenLog(int index) {
 		int count = 0;
 		for (int i = 0; i < log.size(); i ++) {
@@ -88,7 +102,9 @@ public class CallHistory {
 			}
 		}
 	}
-
+	/**
+	 * determines of the number of calls to a contact is 1 or more
+	 */
 	public void checkNumberOfCalls() {
 		int numberOfCalls;
 		for (int i = 0; i < log.size(); i++) {
