@@ -521,66 +521,72 @@ public class Project2
 	
 	public static void switchFavoriteSpeedDialNumber(Scanner scan, PhoneBook myPhoneBook)
 	{
-		int menu, speedDial1, speedDial2, index1, index2;
-		String name1, name2, number1, number2, temp;
-		
-		boolean isValid;
+		int speedDial1, speedDial2, index1, index2;
+		String userInput;
+		boolean isValid1, isValid2;
 		
 		speedDial1 = 10;
 		speedDial2 = 10;
 		
 		index1 = 10;
 		index2 = 10;
-		isValid = false;
+		isValid1 = false;
+		isValid2 = false;
 		
-		System.out.println("\nSwitch favorite speed dial number by...\n1. Speed dial number\n2. Name\n3. Number\n4. Go back");
-		menu = UtilitiesVH.readInt(scan, "\nEnter choice: ", 1,2);
+		System.out.print("\nEnter a speed dial number you want to switch: (done to exit) ");
+		userInput = scan.nextLine().toLowerCase();
 		
-		while (menu != 4)
+		while (!userInput.equals("done"))
 		{
-			if (menu == 1)
+			try
 			{
-				speedDial1 = UtilitiesVH.readInt(scan, "Enter a speed dial number you want to switch: ", 1,5);
+				speedDial1 = Integer.parseInt(userInput);
 				
 				for (int i = 0; i < myPhoneBook.getFavorites().size(); i++)
 				{
 					if (myPhoneBook.getFavorites().get(i).getSpeedDial() == speedDial1)
 					{
 						index1 = i;
-						
 						speedDial2 = UtilitiesVH.readInt(scan, "Enter a speed dial number you want to switch with: ", 1,5);
-						
-						for (int j = 0; j < myPhoneBook.getFavorites().size(); i++)
-						{
-							if (myPhoneBook.getFavorites().get(j).getSpeedDial() == speedDial1)
-							{
-								index2 = j;
-								isValid = true;
-							}
-							else
-							{
-								isValid = isValid || false;
-							}
-						}
+						isValid1 = true;
 					}
 					else
 					{
-						isValid = isValid || false;
+						isValid1 = isValid1 || false;
 					}
 				}
-				
-				if (isValid)
+				for (int j = 0; j < myPhoneBook.getFavorites().size(); j++)
+				{
+					if (myPhoneBook.getFavorites().get(j).getSpeedDial() == speedDial2)
+					{
+						index2 = j;
+						isValid2 = true;
+					}
+					else
+					{
+						isValid2 = isValid2 || false;
+					}
+				}
+				if (isValid1 && isValid2)
 				{
 					myPhoneBook.getFavorites().get(index1).setSpeedDial(speedDial2);
 					myPhoneBook.getFavorites().get(index2).setSpeedDial(speedDial1);
+					System.out.println("Speed dial number switch: success.");
 				}
 				else
 				{
 					System.out.println("There is no favorite assigned to that speed dial number. ");
 				}
+				
+				System.out.print("\nEnter a speed dial number you want to switch: (done to exit) ");
+				userInput = scan.nextLine().toLowerCase();
 			}
-			System.out.println("\nSwitch favorite speed dial number by...\n1. Speed dial number\n2. Name\n3. Number\n4. Go back");
-			menu = UtilitiesVH.readInt(scan, "\nEnter choice: ", 1,2);
+			catch (NumberFormatException e)
+			{
+				System.out.println("ERROR: please enter a number between 1-5 (done to exit)");
+				System.out.print("\nEnter a speed dial number you want to switch: (done to exit) ");
+				userInput = scan.nextLine().toLowerCase();
+			}
 		}
 	}
 
