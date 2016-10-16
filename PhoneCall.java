@@ -1,58 +1,44 @@
-
 import java.util.Calendar;
 
 public class PhoneCall {
-	private String timestamp;
-	private String datestamp;
-	private boolean phoneStatus;
+	private String time;
+	private String date;
+	private boolean isIncoming;
 	private Contact contact;
-	private String status;
-	private int numberOfCalls = 1;
-	private int index;
 
-	public PhoneCall() {
+	public PhoneCall(PhoneCall other) {
+		this.setAll(new Contact(other.contact),other.time,other.isIncoming,other.date);
+	}
 
+	public PhoneCall(Contact contact, boolean isIncoming) {
+		this.calcTime();
+		this.calcDate();
+		this.setAll(contact, this.getTime(), isIncoming, this.getDate());
 	}
-	
-	public PhoneCall(Contact contact, String timestamp, boolean phoneStatus) {
-		this.calcTimestamp();
-		this.calcDateStamp();
-		this.setAll(contact, this.getTimestamp(), phoneStatus, numberOfCalls, this.getDatestamp(), index);
-	}
-	public void setAll(Contact contact, String timestamp, boolean phoneStatus, int numberOfCalls, String datestamp, int index) {
+	public void setAll(Contact contact, String timestamp, boolean isIncoming, String datestamp) {
 		this.setContact(contact);
 		this.setTimestamp(timestamp);
-		this.setphoneStatus(phoneStatus);
-		this.setNumberOfCalls(numberOfCalls);
+		this.setisIncoming(isIncoming);
 		this.setDateStamp(datestamp);
-		this.setIndex(index);
 	}
 
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
 
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
+	public void setTimestamp(String time) {
+		this.time = time;
 	}
 
-	public void setDateStamp(String datestamp) {
-		this.datestamp = datestamp;
+	public void setDateStamp(String date) {
+		this.date = date;
 	}
 
-	public void setphoneStatus(boolean phoneStatus) {
-		this.phoneStatus = phoneStatus;
+	public void setisIncoming(boolean isIncoming) {
+		this.isIncoming = isIncoming;
 	}
 
-	public void setNumberOfCalls(int numberOfCalls) {
-		this.numberOfCalls = numberOfCalls;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	public void calcTimestamp() {
+	public void calcTime() {
 		Calendar today;
 		int day, month, year, hour;
 		String minute;
@@ -62,6 +48,10 @@ public class PhoneCall {
 		if (hour == 0) {
 			hour = 12;
 		}
+		else if (hour > 12)
+		{
+			hour -= 12;
+		}
 		minute = String.format("%02d", today.get(Calendar.MINUTE));
 		if (today.get(Calendar.AM_PM) == 0) {
 			amPm = "AM";
@@ -69,10 +59,10 @@ public class PhoneCall {
 		else {
 			amPm = "PM";
 		}
-		this.timestamp = hour + ":" + minute + ":" + amPm;
+		this.time = hour + ":" + minute + ":" + amPm;
 	}
 
-	public void calcDateStamp() {
+	public void calcDate() {
 		Calendar today;
 		int day, month, year;
 		today = Calendar.getInstance();
@@ -80,38 +70,31 @@ public class PhoneCall {
 		month = today.get(Calendar.MONTH) + 1;
 		year = today.get(Calendar.YEAR);
 
-		this.datestamp = month + "/" + day + "/" + year;
+		this.date = month + "/" + day + "/" + year;
 	}
 
-	public String getTimestamp() {
-		return timestamp;
+	public String getTime() {
+		return this.time;
 	}
 
-	public String getDatestamp() {
-		return datestamp;
+	public String getDate() {
+		return this.date;
 	}
 
 	public Contact getContact() {
-		return contact;
+		return this.contact;
 	}
 
-	public String getPhoneStatus() {
-		status = " ";
-		if (phoneStatus == true) {
-			status = "Incoming";
+	public String getIsIncoming() {
+		if (this.isIncoming)
+		{
+			return "incoming";
 		}
-		else {
-			status = "Outgoing";
-		}
-		return status;
+		return "outgoing";
 	}
-
-	public int getNumberOfCalls() {
-		return numberOfCalls;
+	
+	public String toString()
+	{
+		return "contact = " + this.contact + ", date = " + this.date + " ,time = " + this.time + " ,status = " + this.getIsIncoming();
 	}
-
-	public int getIndex() {
-		return index;
-	}
-
 }

@@ -22,6 +22,12 @@ public class Contact {
 		this.setSpeedDial(speedDial);
 		this.setContactFrame();
 	}
+	
+	public Contact(String name, String number, String notes){
+		this.setAll(name, number, notes);
+		this.setSpeedDial(DEFAULT_SPEEDDIAL);
+		this.setContactFrame();
+	}
 
 	public Contact(String name, String number, String notes, int speedDial, String directory, int fWidth, int fHeight) {
 		this.setAll(name, number, notes);
@@ -42,6 +48,24 @@ public class Contact {
 		this.setName(name);
 		this.setNumber(number);
 		this.setNotes(notes);
+	}
+	
+	public boolean equals(Contact other)
+	{
+		if (this.name.equals(other.name))
+		{
+			if (this.number.equals(other.number))
+			{
+				if (this.notes.equals(other.notes))
+				{
+					if (this.speedDial == other.speedDial)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public void setName(String name) {
@@ -86,6 +110,11 @@ public class Contact {
 
 	public FavoriteContactFrame getContactFrame() {
 		return this.contactframe;
+	}
+	
+	public String toString()
+	{
+		return "name = " + this.name + ", number = " + this.number + ", notes = " + this.notes + ", speeddial = " + this.speedDial;
 	}
 
 }
