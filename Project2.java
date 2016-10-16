@@ -15,11 +15,11 @@ public class Project2
 		////////////////////////////////////////////////////////////
 		//TESTING PURPOSES: FAVORITES
 		
-		Favorite top1 = new Favorite("Timmy","(763)058-9246", "Yummy",1,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
-		Favorite top2 = new Favorite("Hercules", "923-9036", "You're so strong ;)", 2 ,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\corgi.gif", 800, 600);
-		Favorite top3 = new Favorite("Armani", "(928)293-7345", "Sameeeeeee",3,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
-		Favorite top4 = new Favorite("Gucci", "872-0182", "WTF CALVIN HARRIS != TAYLOR SWIFT",4,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
-		Favorite top5 = new Favorite("Cleo", "452-2834", "First love",5,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
+		Contact top1 = new Contact("Timmy","(763)058-9246", "Yummy",1,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
+		Contact top2 = new Contact("Hercules", "923-9036", "You're so strong ;)", 2 ,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\corgi.gif", 800, 600);
+		Contact top3 = new Contact("Armani", "(928)293-7345", "Sameeeeeee",3,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
+		Contact top4 = new Contact("Gucci", "872-0182", "WTF CALVIN HARRIS != TAYLOR SWIFT",4,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
+		Contact top5 = new Contact("Cleo", "452-2834", "First love",5,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 800, 600);
 		
 		myPhoneBook.addContact(top1);
 		myPhoneBook.addContact(top2);
@@ -352,7 +352,7 @@ public class Project2
 				String entireNumber = areaCode+firstNumber+secondNumber;
 				
 				formatNumber = myPhoneBook.formatNumber(entireNumber);
-				Favorite unknown = new Favorite();
+				Contact unknown = new Contact();
 				unknown.setNumber(formatNumber);
 				myPhoneBook.addContact(unknown);
 				
@@ -577,105 +577,6 @@ public class Project2
 				else
 				{
 					System.out.println("There is no favorite assigned to that speed dial number. ");
-				}
-			}
-			else if (menu == 2)
-			{
-				System.out.print("Enter the name of the favorite you wish to switch speed dial numbers with: ");
-				name1 = scan.nextLine().toLowerCase();
-				
-				for (int i = 0; i < myPhoneBook.getFavorites().size(); i++)
-				{
-					if (myPhoneBook.getFavorites().get(i).getName().equals(name1))
-					{
-						index1 = i;
-						System.out.print("Enter the name of the favorite you wish to switch speed dial numbers with: ");
-						name2 = scan.nextLine().toLowerCase();
-						
-						for (int j = 0; j < myPhoneBook.getFavorites().size(); j++)
-						{
-							if (myPhoneBook.getFavorites().get(j).getName().equals(name2))
-							{
-								index2 = j;
-								isValid = true;
-							}
-							else
-							{
-								isValid = isValid || false;
-							}
-						}
-					}
-					else
-					{
-						isValid = isValid || false;
-					}
-				}
-				
-				if(isValid)
-				{
-					speedDial1 = myPhoneBook.getFavorites().get(index1).getSpeedDial();
-					speedDial2 = myPhoneBook.getFavorites().get(index2).getSpeedDial();
-					myPhoneBook.getFavorites().get(index1).setSpeedDial(speedDial2);
-					myPhoneBook.getFavorites().get(index2).setSpeedDial(speedDial1);
-				}
-				else
-				{
-					System.out.println("The name you entered is not found on your favorites list. ");
-				}
-			}
-			else if (menu == 3)
-			{
-				System.out.print("Enter the number of the favorite you wish to switch speed dial numbers with: ");
-				temp = scan.nextLine();
-				
-				while (temp.length() != 10 && temp.length() != 7) {
-					System.out.println("Phone number is invalid, please enter a valid phone number.");
-					temp = scan.nextLine();
-				}
-				number1 = myPhoneBook.formatNumber(temp);
-				
-				for (int i = 0; i < myPhoneBook.getFavorites().size(); i++)
-				{
-					if (myPhoneBook.getFavorites().get(i).getNumber().equals(number1))
-					{
-						index1 = i;
-						System.out.print("Enter the number of the favorite you wish to switch speed dial numbers with: ");
-						temp = scan.nextLine();
-						
-						while (temp.length() != 10 && temp.length() != 7) {
-							System.out.println("Phone number is invalid, please enter a valid phone number.");
-							temp = scan.nextLine();
-						}
-						number2 = myPhoneBook.formatNumber(temp);
-						
-						for (int j = 0; j < myPhoneBook.getFavorites().size(); j++)
-						{
-							if (myPhoneBook.getFavorites().get(j).getName().equals(number2))
-							{
-								index2 = j;
-								isValid = true;
-							}
-							else
-							{
-								isValid = isValid || false;
-							}
-						}
-					}
-					else
-					{
-						isValid = isValid || false;
-					}
-				}
-				if (isValid)
-				{
-					speedDial1 = myPhoneBook.getFavorites().get(index1).getSpeedDial();
-					speedDial2 = myPhoneBook.getFavorites().get(index2).getSpeedDial();
-					myPhoneBook.getFavorites().get(index1).setSpeedDial(speedDial2);
-					myPhoneBook.getFavorites().get(index2).setSpeedDial(speedDial1);
-				}
-				else
-				{
-					System.out.println("The number you entered is not found in your favorites list. ");
 				}
 			}
 			System.out.println("\nSwitch favorite speed dial number by...\n1. Speed dial number\n2. Name\n3. Number\n4. Go back");

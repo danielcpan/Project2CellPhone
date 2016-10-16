@@ -1,5 +1,6 @@
 /**
  * Every Contact object has a String name, String number, String notes, int speedDial, FavoriteContactFrame contactframe.
+ * Simulates every contact added to your phone, a Contact object is created.
  * @author Chad, Victoria, Daniel P, Daniel R, Minh
  *
  */
@@ -171,6 +172,7 @@ public class Contact {
 		this.contactframe = new FavoriteContactFrame();
 	}
 	
+//GETTERS
 	/**
 	 * @return String name
 	 */
@@ -207,7 +209,7 @@ public class Contact {
 	}
 	
 	/**
-	 * @return String - name, number, notes, speedDial contatenated
+	 * @return String - name, number, notes, speedDial concatenated
 	 */
 	public String toString()
 	{
