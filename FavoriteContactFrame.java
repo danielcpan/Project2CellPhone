@@ -3,20 +3,19 @@ import javax.swing.*;
 
 /**
 * This class helps load and display an image from a file.
-* Original source:  http://beginwithjava.blogspot.com/2009/01/loading-and-displaying-image-in-java.html
 * @since 2016-10-04
 */
 public class FavoriteContactFrame extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	public static final String DEFAULT_DIRECTORY = "DEFAULT PATH IDK";
 	private Image image; // Declare a name for our Image object.
 	private Image background1;
 	private Dimension window;  //Declare the dimensions of the window.
 	private String nameInfo;
 	private String numberInfo;
-	private String notesInfo;
+	private String emailInfo;
 	
-
 	/**
 	 * Initializes the JPanel instance variables to default values and image to null
 	 * */
@@ -24,13 +23,14 @@ public class FavoriteContactFrame extends JPanel{
 		   
 		   super();  //Calling parent constructor to initialize all the instance variables in the JPanel class
 		   image = null;
-		   window = new Dimension(600, 400);  //Sets default window dimensions of 600 pixels wide X 400 pixel high
-		   
+		   window = new Dimension(600, 400);  //Sets default window dimensions of 600 pixels wide X 400 pixel high		   
 	}
 	
 	/**
 	 * Initializes the JPanel instance variables to default values and gets image with given directory
 	 * @param directory - the location of the image to be displayed
+	 * @param fWidth - width of frame
+	 * @param fHeight - height of frame
 	 * */
 	public FavoriteContactFrame(String directory, int fWidth, int fHeight){
 		   super();     
@@ -38,7 +38,10 @@ public class FavoriteContactFrame extends JPanel{
 		   image = Toolkit.getDefaultToolkit().getImage(directory);  // Load an image file into our Image object.
 		   background1 = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
 	}
-
+	/**
+	 * overloaded construcotr that will display the image of the contact calling you
+	 * @param other - the frame containing an image and information of the person calling you
+	 */
 	public FavoriteContactFrame(FavoriteContactFrame other)
 	{
 		super();
@@ -47,9 +50,8 @@ public class FavoriteContactFrame extends JPanel{
 		this.window = new Dimension(other.window);
 		this.setNameInfo(other.nameInfo);
 		this.setNumberInfo(other.numberInfo);
-		this.setNotesInfo(other.notesInfo);
+		this.setEmailInfo(other.emailInfo);
 	}
-
 
 	/** 
 	* Overrides the one in JPanel. This is where the drawing happens. We don't have to call it in our program, it gets called
@@ -88,16 +90,17 @@ public class FavoriteContactFrame extends JPanel{
 		  g.setFont(information);
 		  g.drawString(numberInfo, (int) window.getWidth()/2 + 60, 400);
 		  g.setFont(title);
-		  g.drawString("Notes:", 10, (int) window.getHeight() - 100);
+		  g.drawString("Email:", 10, (int) window.getHeight() - 100);
 		  g.fillRect((int) 10, (int) window.getHeight() - 95, 150, 5);
 		  g.setFont(information);
-		  g.drawString(notesInfo, 185, (int) window.getHeight() - 100); 
+		  g.drawString(emailInfo, 185, (int) window.getHeight() - 100); 
 		  
 	 }
 	
 	/**
 	 * Displays the image of the this object
-	 * */
+	 * @param favContact - the favorite contact
+	 */
 	public void displayContactImage(Favorite favContact){
 		//Creating the window
 		  JFrame frame = new JFrame("Favorite Contact: " + favContact.getName());  //title of the frame will be "Favorite Contact"
@@ -150,31 +153,36 @@ public class FavoriteContactFrame extends JPanel{
 
 	    return new Dimension(new_width, new_height);
 	}
+  /**
+   * get the new dimensions of the frame
+   * @param bgSize - 
+   * @param windowSize - size of the frame
+   */
   private static Dimension getScaledDimensionBg(Dimension bgSize, Dimension windowSize) {
 	  int new_width = (int)windowSize.getWidth();
 	  int new_height = (int)windowSize.getHeight();
 	  return new Dimension(new_width, new_height); 
   }
+  /**
+   * set name of user input to instance variable nameInfo
+   * @param nameInfo - name user inputs
+   */
   public void setNameInfo(String nameInfo){
 	  this.nameInfo = nameInfo;
   }
+  /**
+   * set number of user input to instance variable numberInfo
+   * @param numberInfo - name user inputs
+   */
   public void setNumberInfo(String numberInfo){
 	  this.numberInfo = numberInfo;
   }
-  public void setNotesInfo(String notesInfo){
-	  this.notesInfo = notesInfo;
+  /**
+   * set name of user input to instance variable nameInfo
+   * @param nameInfo - name user inputs
+   */
+  public void setEmailInfo(String emailInfo){
+	  this.emailInfo = emailInfo;
   }
 
-  /*public static void main(String arg[]){
-
-	  int fWidth = 800;
-	  int fHeight = 600;
-	  
-
-    //ContactImage contact = new ContactImage("C:\\Users\\Katherine\\Pictures\\totoro.jpg", fWidth, fHeight);
-	  FavoriteContactFrame contact = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", fWidth, fHeight);
-	  contact.displayContactImage();
-
- 
-  }*/
 }
