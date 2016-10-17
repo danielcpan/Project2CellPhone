@@ -91,9 +91,9 @@ public class Project2
 					}
 					break;
 				case 4: //access contacts
-					System.out.println("1. Add a contact.\n2. Remove a contact\n3. Edit a contact.\n4. Display the phone book.\n5. Go back");
+					System.out.println("\n1. Add a contact.\n2. Remove a contact\n3. Edit a contact.\n4. Display the phone book.\n5. Go back");
 					response4 = UtilitiesVH.readInt(scan, "\nEnter choice: ", 1,5);
-					while (response != 5)
+					while (response4 != 5)
 					{
 						switch(response4){
 							case 1:
@@ -193,6 +193,7 @@ public class Project2
 				System.out.println("Number is not on your contacts, but call was still made.");
 				Contact unknown = new Contact();
 				unknown.setNumber(formatNumber);
+				myPhoneBook.addContact(unknown);
 				recordedPhoneCall = new PhoneCall(unknown, false);
 				myPhoneBook.getCallHistory().addCall(recordedPhoneCall);
 			}
@@ -419,11 +420,12 @@ public class Project2
 	{
 		int speedDial;
 		String name;
-		boolean isFound,isAlreadyTaken;
+		boolean isFound,isAlreadyTaken, isReplaced;
 		char replaced;
 		
 		isFound = false;
 		isAlreadyTaken = false;
+		isReplaced = false;
 		
 		System.out.print("Enter the name of the existing contact you wish to add to Favorites: ");
 		name = scan.nextLine().toLowerCase();
@@ -434,28 +436,24 @@ public class Project2
 				speedDial = UtilitiesVH.readInt(scan,"Enter the speed dial number 1-5 you wish to assign to " + name + ":", 1,5);
 				for (int j = 0; j < myPhoneBook.getFavorites().size(); j++)
 				{
-					if (myPhoneBook.getFavorites().get(j).getSpeedDial() == speedDial)
+					if (myPhoneBook.getFavorites().get(j).getSpeedDial() == speedDial && !isReplaced)
 					{
 						System.out.println(myPhoneBook.getFavorites().get(j).getName() + " is assigned to this speed dial number. ");
-						System.out.println("Do you want to replace " + myPhoneBook.getFavorites().get(j).getName() + " with " + name + " anyway? (Y/N)");
 						replaced = UtilitiesVH.readChar(scan, "Do you want to replace " + myPhoneBook.getFavorites().get(j).getName() + " with " + name + " anyway? (Y/N)", "YyNn");
 						
 						if (replaced == 'Y' || replaced == 'y')
 						{
 							myPhoneBook.getFavorites().get(j).setSpeedDial(10);
-							myPhoneBook.getContacts().get(i).setSpeedDial(speedDial);
 							myPhoneBook.getFavorites().remove(j);
-							myPhoneBook.getFavorites().add(myPhoneBook.getContacts().get(i));
+							isReplaced = true;
 						}
 						else
 						{
-							System.out.println("Ok. " + myPhoneBook.getFavorites().get(j) + " is still set to speed dial " + myPhoneBook.getFavorites().get(j).getSpeedDial());
-							System.out.println(name + " is still just a regular contact.");
+							isReplaced = false;
 						}
-						isAlreadyTaken = true;
 					}
 				}
-				if (!isAlreadyTaken)
+				if (isReplaced)
 				{
 					myPhoneBook.getContacts().get(i).setSpeedDial(speedDial);
 					myPhoneBook.getFavorites().add(myPhoneBook.getContacts().get(i));
@@ -594,7 +592,7 @@ public class Project2
 	{
 		int userInput;
 		
-		System.out.println("Enter the speed dial number you want contact info to be displayed: ");
+		System.out.print("Enter the speed dial number you want contact info to be displayed: ");
 		userInput = Integer.parseInt(scan.nextLine());
 		
 		for (int i = 0; i < myPhoneBook.getFavorites().size(); i++)
@@ -628,9 +626,10 @@ public class Project2
 				number = scan.nextLine();
 			}
 			formatNumber = myPhoneBook.formatNumber(number);
-			System.out.println("Please enter any notes");
+			System.out.print("Please enter any notes");
 			notes = scan.nextLine();
-			newContact = new Contact(name,number,notes);
+			newContact = new Contact(name,formatNumber,notes);
+			myPhoneBook.addContact(newContact);
 			
 			another = UtilitiesVH.readChar(scan,"Do you want to add another contact? (Y/N)", "YyNn");
 			if (another == 'N' || another == 'n')
