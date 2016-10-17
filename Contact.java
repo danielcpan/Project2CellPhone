@@ -1,3 +1,4 @@
+
 /**
  * Every Contact object has a String name, String number, String notes, int speedDial, FavoriteContactFrame contactframe.
  * Simulates every contact added to your phone, a Contact object is created.

@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 /**
@@ -104,22 +105,6 @@ public class PhoneBook{
 		if(contacts.size() == 0 && favorites.size() == 0){
 			System.out.println("No contacts available.");
 		}
-	}
-	
-	/**
-	 * 
-	 */
-	public  void printFavorites(){
-		for (int i = 0; i < favorites.size(); i++){
-			if (favorites.get(i).getNumber().length() == 13){
-				System.out.printf("%-40s%-40s%-40s", "Name: " + favorites.get(i).getName() + " #" + favorites.get(i).getSpeedDial(), "Number:" + favorites.get(i).getNumber(), "Notes: " + favorites.get(i).getNotes());
-				System.out.println();
-			}
-			if(favorites.get(i).getNumber().length() == 8){
-				System.out.printf("%-40s%-40s%-40s", "Name: " + favorites.get(i).getName() + " #" + favorites.get(i).getSpeedDial(), "Number: " + favorites.get(i).getNumber(), "Notes: " + favorites.get(i).getNotes());
-				System.out.println();
-			}
-	}
 	}
 	
 	/**
