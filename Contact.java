@@ -31,6 +31,7 @@ public class Contact {
 		this.setContactFrame();
 	}
 
+<<<<<<< HEAD
 	/**
 	 * overloaded constructor for contact class
 	 * 
@@ -65,6 +66,14 @@ public class Contact {
 	 * @param fHeight
 	 *            Integer for height of picture
 	 */
+=======
+	public Contact(String name, String number, String notes, int speedDial) {
+		this.setAll(name, number, notes);
+		this.setSpeedDial(speedDial);
+		this.setContactFrame();
+	}
+
+>>>>>>> Daniel-Ring-Branch
 	public Contact(String name, String number, String notes, int speedDial, String directory, int fWidth, int fHeight) {
 		this.setAll(name, number, notes);
 		this.setSpeedDial(speedDial);
@@ -74,18 +83,22 @@ public class Contact {
 		this.contactframe.setNotesInfo(notes);
 	}
 
+<<<<<<< HEAD
 	/**
 	 * overloaded constructor for contact class
 	 * 
 	 * @param other
 	 *            Takes in a contact object to values of new contact object
 	 **/
+=======
+>>>>>>> Daniel-Ring-Branch
 	public Contact(Contact other) {
 		this.setAll(other.name, other.number, other.notes);
 		this.setSpeedDial(other.speedDial);
 		this.setContactFrame(other.contactframe);
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Sets name, number, and notes all at once for contact
 	 * 
@@ -96,6 +109,8 @@ public class Contact {
 	 * @param notes
 	 *            String for notes of contact
 	 */
+=======
+>>>>>>> Daniel-Ring-Branch
 	public void setAll(String name, String number, String notes) {
 		this.setName(name);
 		this.setNumber(number);
@@ -119,6 +134,7 @@ public class Contact {
 		return this.name;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Sets number for contact
 	 * 
@@ -126,6 +142,8 @@ public class Contact {
 	 *            String for setting number of contact
 	 *
 	 **/
+=======
+>>>>>>> Daniel-Ring-Branch
 	public void setNumber(String number) {
 		this.number = number;
 	}
@@ -155,6 +173,7 @@ public class Contact {
 		return this.notes;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Sets speed dial number for contact
 	 * 
@@ -162,17 +181,23 @@ public class Contact {
 	 *            Integer for setting speed dial number of contact
 	 *
 	 **/
+=======
+>>>>>>> Daniel-Ring-Branch
 	public void setSpeedDial(int speedDial) {
 		this.speedDial = speedDial;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Returns speed dial number of contact
 	 **/
+=======
+>>>>>>> Daniel-Ring-Branch
 	public int getSpeedDial() {
 		return this.speedDial;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Sets contact frame for favorite contact sends in a existing ContactFrame
 	 * to create the new ContactFrame
@@ -181,20 +206,28 @@ public class Contact {
 	 *            FavoriteContactFrame object for setting
 	 *
 	 **/
+=======
+>>>>>>> Daniel-Ring-Branch
 	public void setContactFrame(FavoriteContactFrame contactframe) {
 		this.contactframe = new FavoriteContactFrame(contactframe);
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Sets contactframe of contact to a default contactframe
 	 **/
+=======
+>>>>>>> Daniel-Ring-Branch
 	public void setContactFrame() {
 		this.contactframe = new FavoriteContactFrame();
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Returns the ContactFrame of a contact
 	 **/
+=======
+>>>>>>> Daniel-Ring-Branch
 	public FavoriteContactFrame getContactFrame() {
 		return this.contactframe;
 	}
