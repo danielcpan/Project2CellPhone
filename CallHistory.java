@@ -1,16 +1,30 @@
 import java.util.ArrayList;
 
+/**
+ * Every CallHistory object has instance variables ArrayList<PhoneCall> log, int[] referToIndex, int[] numberOfCalls, String[] printLog.
+ * Simulates how a call log in a phone can display information in multiple folders.
+ * @author Chad, Victoria, Daniel P, Daniel R, Minh
+ */
 public class CallHistory {
 
+	/*****INSTANCE VARIABLES*****/
 	private ArrayList<PhoneCall> log;
 	private int[] referToIndex;
 	private int[] numberOfCalls;
 	private String[] printLog;
-
+	
+//CONSTRUCTORS
+	/**
+	 * default constructor - instantiates ArrayList<PhoneCall> log only
+	 */
 	public CallHistory() {
 		this.log = new ArrayList<PhoneCall>();
 	}
 
+	/**
+	 * copy constructor - initializes CallHistory object instance variable ArrayList<PhoneCall> log to parameter value
+	 * @param other - CallHistory
+	 */
 	public CallHistory(CallHistory other)
 	{
 		this.log = new ArrayList<PhoneCall>();
@@ -20,29 +34,53 @@ public class CallHistory {
 			this.log.add(new PhoneCall(other.log.get(i)));
 		}
 	}
-	public void addCall(PhoneCall contact) {
-		this.log.add(contact);
+
+//SETTERS
+	/**
+	 * adds PhoneCall parameter to ArrayList<PhoneCall> log
+	 * @param contact - PhoneCall
+	 */
+	public void addCall(PhoneCall phoneCall) {
+		this.log.add(phoneCall);
 	}
 	
+//GETTERS
+	/**
+	 * @return ArrayList<PhoneCall> reference (SHALLOW COPY!!!)
+	 */
 	public ArrayList<PhoneCall> getLog()
 	{
 		return this.log;
 	}
 	
+	/**
+	 * @return int[] referToIndex reference (SHALLOW COPY!!!)
+	 */
 	public int[] getReferToIndex()
 	{
 		return this.referToIndex;
 	}
 	
+	/**
+	 * @return int[] numberOfCalls reference (SHALLOW COPY!!!)
+	 */
 	public int[] getNumberOfCalls()
 	{
 		return this.numberOfCalls;
 	}
 	
+	/**
+	 * @return String[] printLog reference (SHALLOW COPY!!!)
+	 */
 	public String[] getPrintLog()
 	{
 		return this.printLog;
 	}
+
+//OTHER METHODS
+	/**
+	 * 
+	 */
 	public void displayCallLog()
 	{	
 		int count,temp;
@@ -111,6 +149,11 @@ public class CallHistory {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param number
+	 * @param length
+	 */
 	public void displayHiddenLog(int number, int length) //more info
 	{	
 		int[] numCalls, referTo;

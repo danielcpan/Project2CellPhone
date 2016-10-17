@@ -1,131 +1,96 @@
 import java.util.ArrayList;
 
+/**
+ * Every PhoneBook object has instance variables ArrayList<Contact> contacts, ArrayList<Contact> favorites, CallHistory myCallHistory.
+ * Simulates a phone where all the contacts, favorites, and call log data is saved.
+ * @author Chad, Victoria, Daniel P, Daniel R, Minh
+ */
 public class PhoneBook{
-	private ArrayList<Favorite> contacts;
-	private ArrayList<Favorite> favorites;
-<<<<<<< HEAD
+	/*****INSTANCE VARIABLES*****/
+	private ArrayList<Contact> contacts;
+	private ArrayList<Contact> favorites;
 	private CallHistory myCallHistory;
 
-=======
-	private ArrayList<Contact> unknowns;
-	private Contact temporary;
+//CONSTRUCTORS
 	/**
-	 * default constructor
+	 * default constructor - instantiates instance variables
 	 */
->>>>>>> origin/master
 	public PhoneBook() {
-		this.contacts = new ArrayList<Favorite>();
-		this.favorites = new ArrayList<Favorite>();
+		this.contacts = new ArrayList<Contact>();
+		this.favorites = new ArrayList<Contact>();
 		this.myCallHistory = new CallHistory();
 	}
-<<<<<<< HEAD
 
-	public void addContact(Favorite contact) {
+//SETTERS
+	/**
+	 * adds parameter Contact object to instance variable ArrayList<Contact> contacts
+	 * @param contact - Contact
+	 */
+	public void addContact(Contact contact) {
 		this.contacts.add(contact);
 	}
-	public void removeContact(Favorite contact){
+	
+	/**
+	 * removes parameter Contact object from instance variable ArrayList<Contact> contacts
+	 * @param contact - Contact
+	 */
+	public void removeContact(Contact contact){
 		this.contacts.remove(contact);
 	}
 
-	public void addFavorite(Favorite favorite) {
+	/**
+	 * adds parameter Contact object to instance variable ArrayList<Contact> favorites
+	 * @param favorite - Contact
+	 */
+	public void addFavorite(Contact favorite) {
 		this.favorites.add(favorite);
 	}
-	public void removeFavorite(Favorite favorite){
+	
+	/**
+	 * removes parameter Contact object from instance variable ArrayList<Contact> favorites
+	 * @param favorite - Contact
+	 */
+	public void removeFavorite(Contact favorite){
 		this.favorites.remove(favorite);
 	}
 	
-	public  ArrayList<Favorite> getContacts(){
+	/**
+	 * calls copy constructor to set CallHistory instance variable to parameter's values
+	 * @param callHistory
+	 */
+	public void setCallHistory(CallHistory callHistory)
+	{
+		this.myCallHistory = new CallHistory(callHistory);
+	}
+	
+//GETTERS	
+	/**
+	 * @return ArrayList<Contact> contacts reference(SHALLOW COPY!!!)
+	 */
+	public  ArrayList<Contact> getContacts(){
 		return this.contacts;
 	}
 	
-	public  ArrayList<Favorite> getFavorites(){
+	/**
+	 * @return ArrayList<Contact> favorites reference (SHALLOW COPY!!!)
+	 */
+	public  ArrayList<Contact> getFavorites(){
 		return this.favorites;
 	}
 	
+	/**
+	 * @return CallHistory reference (SHALLOW COPY!!!)
+	 */
+	public CallHistory getCallHistory()
+	{
+		return this.myCallHistory;
+	}
+
+//OTHER METHODS
+	/**
+	 * 
+	 */
 	public  void printContacts(){
-=======
-	/**
-	 * adds contact to contacts list
-	 * @param userContact - known contact that is not a favorite 
-	 */
-	public void addContact(Contact userContact) {
-		contacts.add(userContact);
-	}
-	/**
-	 * removes a contact from contacts list
-	 * @param userContact - known contact that is not a favorite 
-	 */
-	public void removeContact(Contact userContact){
-		contacts.remove(userContact);
-	}
-	/**
-	 * adds an unknwon contact when user decides to receive a call
-	 * @param userUnknown - unknown contact with no name
-	 */
-	public void addUnknown(Contact userUnknown){
-		unknowns.add(userUnknown);
-	}
-	/**
-	 * adds a favorite contact to favorites list
-	 * @param userFavorite - favorite contact of user
-	 */
-	public void addFavorite(Favorite userFavorite) {
-		favorites.add(userFavorite);
-	}
-	/**
-	 * removes favorite contact from favorites list
-	 * @param userFavorite - favorite contact of user
-	 */
-	public void removeFavorite(Favorite userFavorite){
-		favorites.remove(userFavorite);
-	}
-	/**
-	 * gets the size of the contacts list
-	 * @return contacts.size - size of contacts array list
-	 */
-	public int getContactSize() {
-		return contacts.size();
-	}
-	/**
-	 * gets the size of the favorites list
-	 * @return favorites.size - size of contacts array list
-	 */
-	public  int getFavoriteSize() {
-		return favorites.size();
-	}
-	/**
-	 * gets the array list of known, non-favored contacts
-	 * @return contacts - array list of contacts 
-	 */
-	public  ArrayList<Contact> getContactArrayList(){
-		return contacts;
-	}
-	/**
-	 * gets the array list of known, favored contacts
-	 * @return favorites - array list of favorites 
-	 */
-	public  ArrayList<Favorite> getFavoriteArrayList(){
-		return favorites;
-	}
-	/**
-	 * formats 7 or 10 digit phone number
-	 * @param unformattedNumber - randomly generated 7 or 10-digit phone number
-	 */
-	public String formatNumber(String unformattedNumber){
-		String newNumber = "";
-		if (unformattedNumber.length() == 7){
-			 newNumber = unformattedNumber.substring(0,3) + "-" + unformattedNumber.substring(3,7);
-		}
-		if (unformattedNumber.length() == 10){
-			newNumber = "(" + unformattedNumber.substring(0,3) + ")" + unformattedNumber.substring(3,6) + "-" + unformattedNumber.substring(6,10);
-		}
-		return newNumber;
-	}
-	/**
-	 * displays contacts in a specific format
-	 */
-	public  void contactsToString(){
->>>>>>> origin/master
 		for (int i = 0; i < contacts.size(); i++){
 			if (contacts.get(i).getNumber().length() == 13){
 				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
@@ -140,14 +105,11 @@ public class PhoneBook{
 			System.out.println("No contacts available.");
 		}
 	}
-<<<<<<< HEAD
-	public  void printFavorites(){
-=======
+	
 	/**
-	 * displays favorite contacts in a specific format
+	 * 
 	 */
-	public  void favoritesToString(){
->>>>>>> origin/master
+	public  void printFavorites(){
 		for (int i = 0; i < favorites.size(); i++){
 			if (favorites.get(i).getNumber().length() == 13){
 				System.out.printf("%-40s%-40s%-40s", "Name: " + favorites.get(i).getName() + " #" + favorites.get(i).getSpeedDial(), "Number:" + favorites.get(i).getNumber(), "Notes: " + favorites.get(i).getNotes());
@@ -159,24 +121,12 @@ public class PhoneBook{
 			}
 	}
 	}
-<<<<<<< HEAD
 	
-=======
 	/**
-	 * displays unknown contacts
+	 * 
 	 */
-	public  void unknownToString(){
-		for(int i = 0; i < unknowns.size(); i++){
-			System.out.println(i + " Name: " + unknowns.get(i).getName() + " Number: " + unknowns.get(i).getNumber() + " Notes: " + 
-					unknowns.get(i).getNotes());
-		}
-	}
-	/**
-	 * sort contacts list alphabetically
-	 */
->>>>>>> origin/master
 	public  void compareContacts() {
-		Favorite temporary = new Favorite();
+		Contact temporary = new Contact();
 		
 		for (int i = 0; i < contacts.size(); i++) {
 			for (int j = 0; j < contacts.size(); j++) {
@@ -197,19 +147,14 @@ public class PhoneBook{
 	}
 	
 	/**
-	 * sort favorites list alphabetically
+	 * 
 	 */
 	public void compareFavorites() {
 		for (int i = 0; i < favorites.size(); i++) {
 			for (int j = 0; j < favorites.size(); j++) {
 				if (favorites.get(i).getSpeedDial() < favorites.get(j).getSpeedDial()) {
-<<<<<<< HEAD
-					Favorite temporaryFavorite = new Favorite(favorites.get(j).getName(), favorites.get(j).getNumber(), favorites.get(j).getNotes(),
+					Contact temporaryFavorite = new Contact(favorites.get(j).getName(), favorites.get(j).getNumber(), favorites.get(j).getNotes(),
 							favorites.get(j).getSpeedDial());
-=======
-					Favorite temporaryFavorite = new Favorite(favorites.get(j).getName(), favorites.get(j).getNumber(), favorites.get(j).getEmail(),
-							favorites.get(j).getSpeedDial(), favorites.get(j).getDirectory(), favorites.get(j).getWidth(), favorites.get(j).getHeight());
->>>>>>> origin/master
 					favorites.set(j, favorites.get(i));
 					favorites.set(i, temporaryFavorite);
 				}
@@ -217,16 +162,11 @@ public class PhoneBook{
 		}
 	}
 	
-	public void setCallHistory(CallHistory callHistory)
-	{
-		this.myCallHistory = new CallHistory(callHistory);
-	}
-	
-	public CallHistory getCallHistory()
-	{
-		return this.myCallHistory;
-	}
-	
+	/**
+	 * 
+	 * @param unformattedNumber - String
+	 * @return String
+	 */
 	public String formatNumber(String unformattedNumber){
 		String newNumber = "";
 		if (unformattedNumber.length() == 7){
