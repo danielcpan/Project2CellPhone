@@ -1,18 +1,17 @@
-//Victoria Hong
-//CECS 274H
-
-package utilitiesVH;
-
 import java.util.Scanner;
-import homework2.Item;
+
+//import homework2.Item;
 
 public class UtilitiesVH 
 {
-	// DESCRIPTION:		reads input from user, returns char value (error-checked using validChars)
-	// PRECONDITIONS:	key is instantiated
-	// POSTCONDITIONS:	result is char value if validChars.indexOf(result) returns a number not -1
-	//					(meaning the index is found so result is in validChars), buffer still has
-	//					whitespace
+	/**
+	 * reads input from user, returns char value (error-checked using validChars)
+	 * @param keyboard - Scanner
+	 * @param prompt - String
+	 * @param validChars - String
+	 * @return char - if validChars.indexOf(result) returns a number not -1
+	 * (meaning the index is found so result is in validChars)
+	 */
 	public static char readChar(Scanner keyboard, String prompt, String validChars)
 	{
 		String temp;
@@ -37,10 +36,14 @@ public class UtilitiesVH
 			
 		return result;
 	}
-	
-	// DESCRIPTION:		reads input from user, returns double value (error-checked using bounds)
-	// PRECONDITIONS:	key is instantiated, lower < upper
-	// POSTCONDITIONS:	returns a double between lower and upper values, inclusive, buffer still has whitespace
+
+	/**
+	 * returns a double between lower and upper values, inclusive
+	 * @param keyboard - Scanner
+	 * @param prompt - String
+	 * @param bound - double
+	 * @return double
+	 */
 	public static double readDouble(Scanner keyboard, String prompt, double bound)
 	{
 		String temp;
@@ -75,9 +78,14 @@ public class UtilitiesVH
 		return result;
 	}
 	
-	// DESCRIPTION:		reads input from user, returns integer value (error-checked using bounds)
-	// PRE-CONDITIONS:	key is instantiated, lower < upper
-	// POST-CONDITIONS:	returns integer value between lower and upper (inclusive)
+	/**
+	 * returns integer value between lower and upper (inclusive)
+	 * @param keyboard - Scanner
+	 * @param prompt - String
+	 * @param lowerBound - int
+	 * @param upperBound - int
+	 * @return int
+	 */
 	public static int readInt(Scanner keyboard, String prompt, int lowerBound, int upperBound)
 	{
 		String temp;
@@ -119,7 +127,13 @@ public class UtilitiesVH
 		return result;
 	}
 	
-//overloaded, gets positive int
+	/**
+	 * overloaded readInt() gets positive int
+	 * @param keyboard
+	 * @param prompt
+	 * @param lowerBound
+	 * @return int
+	 */
 	public static int readInt(Scanner keyboard, String prompt, int lowerBound)
 	{
 		String temp;
@@ -180,7 +194,7 @@ public class UtilitiesVH
 	}
 
 //overloaded
-	public static void sortArrays(Item[] items, int[] itemCount)
+	/*public static void sortArrays(Item[] items, int[] itemCount)
 	{
 		int indexOfNextSmallest, temp1;
 		Item temp;
@@ -198,7 +212,7 @@ public class UtilitiesVH
 			items[indexOfNextSmallest] = temp;
 			itemCount[indexOfNextSmallest] = temp1;
 		}
-	}
+	}*/
 	
 	//DESCRIPTION:		gets the index of the smallest value from the startIndex parameter
 	//PRE-CONDITIONS:	parameter values are valid
@@ -222,7 +236,7 @@ public class UtilitiesVH
 	}
 	
 //overloaded
-	private static int indexOfSmallest(int startIndex, Item[] items)
+	/*private static int indexOfSmallest(int startIndex, Item[] items)
 	{
 		int min, index, indexOfMin;
 		
@@ -238,5 +252,5 @@ public class UtilitiesVH
 			}
 		}
 		return indexOfMin;
-	}
+	}*/
 }
