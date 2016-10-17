@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import edu.project_2.UtilitiesVH;
 
@@ -14,11 +15,11 @@ public class Project2 {
 			////////////////////////////////////////////////////////////
 			//TESTING PURPOSES: FAVORITES
 			
-			Contact example1 = new Contact("Timmy","(763)058-9246", "Brother",1,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\lion.jpg", 1200, 600);
-			Contact example2 = new Contact("Hercules", "923-9036", "Best Friend", 2 ,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\corgi.gif", 1200, 600);
-			Contact example3 = new Contact("Armani", "(928)293-7345", "Cousin",3,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg",1200, 800);
-			Contact example4 = new Contact("George", "872-0182", "Uncle",4,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 1200, 800);
-			Contact example5 = new Contact("Cleo", "452-2834", "Sister",5,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\penguin.jpg", 1200, 800);
+			Contact example1 = new Contact("Timmy","(763)058-9246", "Brother","timmy123@gmail.com",1,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\lion.jpg", 1200, 800);
+			Contact example2 = new Contact("Hercules", "923-9036", "Best Friend","hercules1996@gmail.com", 2 ,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\corgi.jpg", 1200, 800);
+			Contact example3 = new Contact("Armani", "(928)293-7345", "Cousin","armani102@gmail.com",3,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\dolphin.jpg",1200, 800);
+			Contact example4 = new Contact("George", "872-0182", "Uncle","georgetheuncle@gmail.com",4,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\sloth.jpg", 1200, 800);
+			Contact example5 = new Contact("Cleo", "452-2834", "Sister","cleo6264@gmail.com",5,"C:\\Users\\Chad\\Pictures\\CECS274Proj2\\seal.jpg", 1200, 800);
 			
 			myPhoneBook.addContact(example1);
 			myPhoneBook.addContact(example2);
@@ -175,7 +176,7 @@ public class Project2 {
 				
 				while (number.length() != 10 && number.length() != 7) 
 				{
-					System.out.print("Phone number is invalid, please enter a valid phone number: ");
+					System.out.println("Phone number is invalid, please enter a valid phone number: ");
 					number = scan.nextLine();
 				}
 				formatNumber = myPhoneBook.formatNumber(number);
@@ -524,6 +525,7 @@ public class Project2 {
 						System.out.println("Are you sure you want to un-Favorite: " + myPhoneBook.getFavorites().get(i).getName());
 						System.out.println("Number: " + myPhoneBook.getFavorites().get(i).getNumber());
 						System.out.println("Notes: " + myPhoneBook.getFavorites().get(i).getNotes());
+						System.out.println("Email: " + myPhoneBook.getFavorites().get(i).getEmail());
 						unfav = UtilitiesVH.readChar(scan, "(Y/N): ", "YyNn");
 						
 						if (unfav == 'Y' || unfav == 'y')
@@ -658,7 +660,7 @@ public class Project2 {
  */
 		public static void addContact(Scanner scan, PhoneBook myPhoneBook) 
 		{
-			String name, number, notes, formatNumber;
+			String name, number, notes, email, formatNumber;
 			Contact newContact;
 			char another;
 			boolean again;
@@ -678,7 +680,9 @@ public class Project2 {
 				formatNumber = myPhoneBook.formatNumber(number);
 				System.out.print("Please enter any notes: ");
 				notes = scan.nextLine();
-				newContact = new Contact(name,formatNumber,notes);
+				System.out.print("Please enter the email: ");
+				email = scan.nextLine();
+				newContact = new Contact(name,formatNumber,notes,email);
 				myPhoneBook.addContact(newContact);
 				
 				another = UtilitiesVH.readChar(scan,"Do you want to add another contact? (Y/N)", "YyNn");
@@ -697,9 +701,9 @@ public class Project2 {
 		{
 			int menu, submenu;
 			char edit;
-			String name, number, formatNumber, notes;
+			String name, number, formatNumber, notes, email;
 			
-			System.out.println("1. Edit contact by name\n2. Edit contact by number\n 3.Go back\n");
+			System.out.println("1. Edit contact by name\n2. Edit contact by number\n3.Go back\n");
 			menu = UtilitiesVH.readInt(scan, "Enter choice: ", 1,3);
 			
 			while (menu != 3)
@@ -713,14 +717,15 @@ public class Project2 {
 					{
 						if (myPhoneBook.getContacts().get(i).getName().equals(name))
 						{
-							System.out.println("Do you want to..\n1. Edit number\n2. Edit notes\n3. Go back\n");
-							submenu = UtilitiesVH.readInt(scan, "Enter choice: ", 1,3);
+							System.out.println("Do you want to..\n1. Edit number\n2. Edit notes\n3. Edit email\n4. Go back\n");
+							submenu = UtilitiesVH.readInt(scan, "Enter choice: ", 1,4);
 							
 							if (submenu == 1)
 							{
 								System.out.println("Name: " + myPhoneBook.getContacts().get(i).getName());
 								System.out.println("Number: " + myPhoneBook.getContacts().get(i).getNumber());
 								System.out.println("Notes: " + myPhoneBook.getContacts().get(i).getNotes());
+								System.out.println("Email : " + myPhoneBook.getContacts().get(i).getEmail());
 								System.out.println("\nEnter new number: ");
 								number = scan.nextLine();
 								while (number.length() != 10 && number.length() != 7) {
@@ -735,9 +740,20 @@ public class Project2 {
 								System.out.println("Name: " + myPhoneBook.getContacts().get(i).getName());
 								System.out.println("Number: " + myPhoneBook.getContacts().get(i).getNumber());
 								System.out.println("Notes: " + myPhoneBook.getContacts().get(i).getNotes());
+								System.out.println("Email: " + myPhoneBook.getContacts().get(i).getEmail());
 								System.out.println("\nEnter new notes: ");
 								notes = scan.nextLine();
 								myPhoneBook.getContacts().get(i).setNotes(notes);
+							}
+							else if (submenu == 3)
+							{
+								System.out.println("Name: " + myPhoneBook.getContacts().get(i).getName());
+								System.out.println("Number: " + myPhoneBook.getContacts().get(i).getNumber());
+								System.out.println("Notes: " + myPhoneBook.getContacts().get(i).getNotes());
+								System.out.println("Email: " + myPhoneBook.getContacts().get(i).getEmail());
+								System.out.println("\nEnter new email: ");
+								email = scan.nextLine();
+								myPhoneBook.getContacts().get(i).setEmail(email);
 							}
 						}
 					}
@@ -755,14 +771,15 @@ public class Project2 {
 					{
 						if (myPhoneBook.getContacts().get(i).getNumber().equals(formatNumber))
 						{
-							System.out.println("Do you want to..\n1. Edit name\n2. Edit notes\n3. Go back\n");
-							submenu = UtilitiesVH.readInt(scan, "Enter choice: ", 1,3);
+							System.out.println("Do you want to..\n1. Edit name\n2. Edit notes\n3. Edit email\n4. Go back\n");
+							submenu = UtilitiesVH.readInt(scan, "Enter choice: ", 1,4);
 							
 							if (submenu == 1) //edit name
 							{
 								System.out.println("Name: " + myPhoneBook.getContacts().get(i).getName());
 								System.out.println("Number: " + myPhoneBook.getContacts().get(i).getNumber());
 								System.out.println("Notes: " + myPhoneBook.getContacts().get(i).getNotes());
+								System.out.println("Email: " + myPhoneBook.getContacts().get(i).getEmail());
 								System.out.println("\nEnter new name: ");
 								name = scan.nextLine();
 								myPhoneBook.getContacts().get(i).setName(name);
@@ -772,9 +789,20 @@ public class Project2 {
 								System.out.println("Name: " + myPhoneBook.getContacts().get(i).getName());
 								System.out.println("Number: " + myPhoneBook.getContacts().get(i).getNumber());
 								System.out.println("Notes: " + myPhoneBook.getContacts().get(i).getNotes());
+								System.out.println("Email: " + myPhoneBook.getContacts().get(i).getEmail());
 								System.out.println("\nEnter new notes: ");
 								notes = scan.nextLine();
 								myPhoneBook.getContacts().get(i).setNotes(notes);
+							}
+							else if (submenu == 3)
+							{
+								System.out.println("Name: " + myPhoneBook.getContacts().get(i).getName());
+								System.out.println("Number: " + myPhoneBook.getContacts().get(i).getNumber());
+								System.out.println("Notes: " + myPhoneBook.getContacts().get(i).getNotes());
+								System.out.println("Email: " + myPhoneBook.getContacts().get(i).getEmail());
+								System.out.println("\nEnter new email: ");
+								email = scan.nextLine();
+								myPhoneBook.getContacts().get(i).setEmail(email);
 							}
 						}
 					}
@@ -822,6 +850,7 @@ public class Project2 {
 							System.out.println("Name: " + myPhoneBook.getContacts().get(i).getName());
 							System.out.println("Number: " + myPhoneBook.getContacts().get(i).getNumber());
 							System.out.println("Notes: " + myPhoneBook.getContacts().get(i).getNotes());
+							System.out.println("Email: " + myPhoneBook.getContacts().get(i).getEmail());
 							
 							sure = UtilitiesVH.readChar(scan, "Are you sure you want to delete this contact? (Y/N)", "YyNn");
 							
@@ -857,6 +886,7 @@ public class Project2 {
 							System.out.println("Name: " + myPhoneBook.getContacts().get(i).getName());
 							System.out.println("Number: " + myPhoneBook.getContacts().get(i).getNumber());
 							System.out.println("Notes: " + myPhoneBook.getContacts().get(i).getNotes());
+							System.out.println("Email: " + myPhoneBook.getContacts().get(i).getEmail());
 							
 							System.out.println("Are you sure you want to delete this contact? (Y/N");
 							sure = UtilitiesVH.readChar(scan, "Are you sure you want to delete this contact? (Y/N", "YyNn");

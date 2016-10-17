@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 /**
@@ -94,17 +95,21 @@ public class PhoneBook{
 		for (int i = 0; i < contacts.size(); i++){
 			if(!contacts.get(i).getName().equals("UNKNOWN")){
 			if (contacts.get(i).getNumber().length() == 13 && (contacts.get(i).getSpeedDial() > 0 && contacts.get(i).getSpeedDial() < 6)){
-				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName() + "(" + contacts.get(i).getSpeedDial() + ")", "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
+				System.out.printf("%-40s%-40s%-40s%-40s", "Name: " + contacts.get(i).getName() + "(" + contacts.get(i).getSpeedDial() + ")",
+						"Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes(), "Email: " + contacts.get(i).getEmail());
 				System.out.println(); }
 			else if(contacts.get(i).getNumber().length() == 13 && (contacts.get(i).getSpeedDial() < 0 || contacts.get(i).getSpeedDial() > 6) ){
-				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
+				System.out.printf("%-40s%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number:" + contacts.get(i).getNumber(),
+						"Notes: " + contacts.get(i).getNotes(), "Email: " + contacts.get(i).getEmail());
 				System.out.println();
 			}
 			else if (contacts.get(i).getNumber().length() == 8 && (contacts.get(i).getSpeedDial() > 0 && contacts.get(i).getSpeedDial() < 6)){
-				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName() + "(" + contacts.get(i).getSpeedDial() + ")", "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
+				System.out.printf("%-40s%-40s%-40s%-40s", "Name: " + contacts.get(i).getName() + "(" + contacts.get(i).getSpeedDial() + ")",
+						"Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes(), "Email: " + contacts.get(i).getEmail());
 				System.out.println(); }
 			else if(contacts.get(i).getNumber().length() == 8 && (contacts.get(i).getSpeedDial() < 0 || contacts.get(i).getSpeedDial() > 6) ){
-				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
+				System.out.printf("%-40s%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number:" + contacts.get(i).getNumber(),
+						"Notes: " + contacts.get(i).getNotes(), "Email: " + contacts.get(i).getEmail());
 				System.out.println();
 			}
 		}

@@ -8,17 +8,16 @@ import javax.swing.*;
 */
 public class FavoriteContactFrame extends JPanel{
 	
-	/*****INSTANCE VARIABLES*****/
 	private Image image; // Declare a name for our Image object.
 	private Image background;
 	private Dimension window;  //Declare the dimensions of the window.
 	private String nameInfo;
 	private String numberInfo;
 	private String notesInfo;
+	private String emailInfo;
 	private String directory;
 	
 	
-//CONSTRUCTORS
 	/**
 	 * Initializes the JPanel instance variables to default values and gets image with given directory
 	 * @param directory - the location of the image to be displayed
@@ -30,10 +29,6 @@ public class FavoriteContactFrame extends JPanel{
 		   background = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
 	}
 
-	/**
-	 * Copy constructor - Initializes instance variables to parameter's values
-	 * @param FavoriteContactFrame other
-	 */
 	public FavoriteContactFrame(FavoriteContactFrame other)
 	{
 		super();
@@ -43,10 +38,10 @@ public class FavoriteContactFrame extends JPanel{
 		this.setNameInfo(other.nameInfo);
 		this.setNumberInfo(other.numberInfo);
 		this.setNotesInfo(other.notesInfo);
-		this.setDirectory(other.directory);
+		this.setEmailInfo(other.emailInfo);
 	}
 
-//GETTERS
+
 	/** 
 	* Overrides the one in JPanel. This is where the drawing happens. We don't have to call it in our program, it gets called
 	* automatically whenever the panel needs to be redrawn, like when it it made visible or moved.
@@ -54,8 +49,6 @@ public class FavoriteContactFrame extends JPanel{
 	*/
 	@Override
 	public void paintComponent(Graphics g){
-	
-		//int backgroundNum = (int) Math.random() * 3;
 		
 		  // Resizing our image to fit the window
 		  Dimension originalImg = new Dimension(image.getWidth(this), image.getHeight(this));	    
@@ -67,7 +60,7 @@ public class FavoriteContactFrame extends JPanel{
 		  	
 		  
 		// Draw our Image object.
-		  g.drawImage(background, 0, 0, resizedBg.width, (int) resizedBg.getHeight(), this);
+		  g.drawImage(background, 0, 0, resizedBg.width, (int) resizedBg.height, this);
 		  g.setColor(Color.orange);
 		  g.fillRect(0, 0, resizedImg.width + 20, resizedImg.height+20);
 		  g.setColor(Color.red);
@@ -84,10 +77,15 @@ public class FavoriteContactFrame extends JPanel{
 		  g.setFont(information);
 		  g.drawString(numberInfo, (int) window.getWidth()/2 + 60, 400);
 		  g.setFont(title);
-		  g.drawString("Notes:", 10, (int) window.getHeight() - 100);
+		  g.drawString("Notes:", (int) window.getWidth()/2 + 40, 500);
+		  g.fillRect((int) window.getWidth()/2 + 40, 505, 150, 5);
+		  g.setFont(information);
+		  g.drawString(notesInfo, (int) window.getWidth()/2 + 60, 600);
+		  g.setFont(title);
+		  g.drawString("Email:", 10, (int) window.getHeight() - 100);
 		  g.fillRect((int) 10, (int) window.getHeight() - 95, 150, 5);
 		  g.setFont(information);
-		  g.drawString(notesInfo, 185, (int) window.getHeight() - 100); 
+		  g.drawString(emailInfo, 185, (int) window.getHeight() - 100); 
 		  
 	 }
 	
@@ -138,21 +136,24 @@ public class FavoriteContactFrame extends JPanel{
 	    int new_height = original_height;
 
 	    // first check if we need to scale width
-	    if (original_width > window_width/2) {
+	   /* if (original_width > window_width/2) {
 	        //scale width to fit within 1/2 the window width
 	        new_width = window_width/2;
 	        //scale height to maintain aspect ratio
-	        new_height = (new_width * original_height) / original_width;
+	        //new_height = (new_width * original_height) / original_width;
+	        new_height = window_height - 200;
 	    }
 
 	    // then check if we need to scale even with the new height
 	    if (new_height > window_height) {
 	        //scale height to fit 
-	        new_height = window_height - 150;
+	        new_height = window_height - 200;
 	        //scale width to maintain aspect ratio
-	        new_width = (new_height * original_width) / original_height;
-	    }
-
+	        //new_width = (new_height * original_width) / original_height;
+	        new_width = window_width/2;
+	    }*/
+	    new_height = window_height - 200;
+	    new_width = window_width/2;
 	    return new Dimension(new_width, new_height);
 	}
   
@@ -167,32 +168,38 @@ public class FavoriteContactFrame extends JPanel{
 	  int new_height = (int)windowSize.getHeight();
 	  return new Dimension(new_width, new_height); 
   }
- 
-//SETTERS
+  // SETTERS
   /**
    * Sets name of favorite
-   * @param nameInfo
+   * @param nameInfo - String
    */
   public void setNameInfo(String nameInfo){
 	  this.nameInfo = nameInfo;
   }
   /**
    * Sets number of favorite
-   * @param numberInfo
+   * @param numberInfo - String
    */
   public void setNumberInfo(String numberInfo){
 	  this.numberInfo = numberInfo;
   }
   /**
    * Sets notes of favorite
-   * @param notesInfo
+   * @param notesInfo - String
    */
   public void setNotesInfo(String notesInfo){
 	  this.notesInfo = notesInfo;
   }
   /**
+   * Sets email of favorite
+   * @param emailInfo - String
+   */
+  public void setEmailInfo(String emailInfo){
+	  this.emailInfo = emailInfo;
+  }
+  /**
    * Sets directory of favorite
-   * @param directory
+   * @param directory - String
    */
  public void setDirectory(String directory){
 	 this.directory = directory;
