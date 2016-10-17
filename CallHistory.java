@@ -154,8 +154,8 @@ public class CallHistory {
 	
 	/**
 	 * Expands a multiple call log
-	 * @param number
-	 * @param length
+	 * @param number - int (user input from printLog)
+	 * @param length - int (the length of printLog printed, printLog is partially filled)
 	 */
 	public void displayHiddenLog(int number, int length) //more info
 	{	

@@ -8,6 +8,7 @@ import javax.swing.*;
 */
 public class FavoriteContactFrame extends JPanel{
 	
+	/*****INSTANCE VARIABLES*****/
 	private Image image; // Declare a name for our Image object.
 	private Image background;
 	private Dimension window;  //Declare the dimensions of the window.
@@ -17,6 +18,7 @@ public class FavoriteContactFrame extends JPanel{
 	private String directory;
 	
 	
+//CONSTRUCTORS
 	/**
 	 * Initializes the JPanel instance variables to default values and gets image with given directory
 	 * @param directory - the location of the image to be displayed
@@ -28,6 +30,10 @@ public class FavoriteContactFrame extends JPanel{
 		   background = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
 	}
 
+	/**
+	 * Copy constructor - Initializes instance variables to parameter's values
+	 * @param FavoriteContactFrame other
+	 */
 	public FavoriteContactFrame(FavoriteContactFrame other)
 	{
 		super();
@@ -37,9 +43,10 @@ public class FavoriteContactFrame extends JPanel{
 		this.setNameInfo(other.nameInfo);
 		this.setNumberInfo(other.numberInfo);
 		this.setNotesInfo(other.notesInfo);
+		this.setDirectory(other.directory);
 	}
 
-
+//GETTERS
 	/** 
 	* Overrides the one in JPanel. This is where the drawing happens. We don't have to call it in our program, it gets called
 	* automatically whenever the panel needs to be redrawn, like when it it made visible or moved.
@@ -160,6 +167,8 @@ public class FavoriteContactFrame extends JPanel{
 	  int new_height = (int)windowSize.getHeight();
 	  return new Dimension(new_width, new_height); 
   }
+ 
+//SETTERS
   /**
    * Sets name of favorite
    * @param nameInfo

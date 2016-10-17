@@ -31,7 +31,7 @@ public class Contact {
 	public Contact() {
 		this.setAll(DEFAULT_NAME, DEFAULT_NUMBER, DEFAULT_NOTES);
 		this.setSpeedDial(DEFAULT_SPEEDDIAL);
-		this.contactframe = new FavoriteContactFrame(DEFAULT_DIRECTORY,DEFUALT_WIDTH,DEFAULT_HEIGHT);
+		this.contactframe = new FavoriteContactFrame(DEFAULT_DIRECTORY,DEFAULT_WIDTH,DEFAULT_HEIGHT);
 		this.contactframe.setNameInfo(name);
 		this.contactframe.setNumberInfo(number);
 		this.contactframe.setNotesInfo(notes);
@@ -48,7 +48,7 @@ public class Contact {
 	public Contact(String name, String number, String notes, int speedDial) {
 		this.setAll(name, number, notes);
 		this.setSpeedDial(speedDial);
-		this.contactframe = new FavoriteContactFrame(DEFAULT_DIRECTORY,DEFUALT_WIDTH,DEFAULT_HEIGHT);
+		this.contactframe = new FavoriteContactFrame(DEFAULT_DIRECTORY,DEFAULT_WIDTH,DEFAULT_HEIGHT);
 		this.contactframe.setNameInfo(name);
 		this.contactframe.setNumberInfo(number);
 		this.contactframe.setNotesInfo(notes);
@@ -64,7 +64,7 @@ public class Contact {
 	public Contact(String name, String number, String notes){
 		this.setAll(name, number, notes);
 		this.setSpeedDial(DEFAULT_SPEEDDIAL);
-		this.contactframe = new FavoriteContactFrame(DEFAULT_DIRECTORY,DEFUALT_WIDTH,DEFAULT_HEIGHT);
+		this.contactframe = new FavoriteContactFrame(DEFAULT_DIRECTORY,DEFAULT_WIDTH,DEFAULT_HEIGHT);
 		this.contactframe.setNameInfo(name);
 		this.contactframe.setNumberInfo(number);
 		this.contactframe.setNotesInfo(notes);
