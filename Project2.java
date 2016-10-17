@@ -155,8 +155,8 @@ public class Project2 {
 		}
 /**
  * creates a Phonecall object for desired number to call
- * @param scan
- * @param myPhoneBook
+ * @param scan - Scanner
+ * @param myPhoneBook - PhoneBook
  */
 		public static void callByNumber(Scanner scan, PhoneBook myPhoneBook) {
 			char again;
@@ -175,7 +175,7 @@ public class Project2 {
 				
 				while (number.length() != 10 && number.length() != 7) 
 				{
-					System.out.println("Phone number is invalid, please enter a valid phone number.");
+					System.out.print("Phone number is invalid, please enter a valid phone number: ");
 					number = scan.nextLine();
 				}
 				formatNumber = myPhoneBook.formatNumber(number);
@@ -230,7 +230,7 @@ public class Project2 {
 						nameValid = true;
 					}
 				}
-				if (nameValid == false)
+				if (!nameValid)
 				{
 					System.out.println("We didn't recognize that name from your contacts.");
 				}
@@ -275,7 +275,7 @@ public class Project2 {
 						}
 					}
 					
-					if (speedDialValid == false){
+					if (!speedDialValid){
 						System.out.println("You didn't enter a valid speed dial number or you don't have a contact assigned for that speed dial number.");
 					}
 					
@@ -645,7 +645,7 @@ public class Project2 {
 					validFavorite = true;
 				}
 			}
-			if (validFavorite == false){
+			if (!validFavorite){
 				System.out.println("There is no favorite assigned to that speed dial number. ");
 			}
 			
