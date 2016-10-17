@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 /**
@@ -89,26 +88,34 @@ public class PhoneBook{
 
 //OTHER METHODS
 	/**
-	 * 
+	 * Prints all the contacts in a formatted manner.
 	 */
 	public  void printContacts(){
 		for (int i = 0; i < contacts.size(); i++){
-			if (contacts.get(i).getNumber().length() == 13){
+			if(!contacts.get(i).getName().equals("UNKNOWN")){
+			if (contacts.get(i).getNumber().length() == 13 && (contacts.get(i).getSpeedDial() > 0 && contacts.get(i).getSpeedDial() < 6)){
+				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName() + "(" + contacts.get(i).getSpeedDial() + ")", "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
+				System.out.println(); }
+			else if(contacts.get(i).getNumber().length() == 13 && (contacts.get(i).getSpeedDial() < 0 || contacts.get(i).getSpeedDial() > 6) ){
 				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
 				System.out.println();
 			}
-			if(contacts.get(i).getNumber().length() == 8){
-				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number: " + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
+			else if (contacts.get(i).getNumber().length() == 8 && (contacts.get(i).getSpeedDial() > 0 && contacts.get(i).getSpeedDial() < 6)){
+				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName() + "(" + contacts.get(i).getSpeedDial() + ")", "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
+				System.out.println(); }
+			else if(contacts.get(i).getNumber().length() == 8 && (contacts.get(i).getSpeedDial() < 0 || contacts.get(i).getSpeedDial() > 6) ){
+				System.out.printf("%-40s%-40s%-40s", "Name: " + contacts.get(i).getName(), "Number:" + contacts.get(i).getNumber(), "Notes: " + contacts.get(i).getNotes());
 				System.out.println();
 			}
+		}
 		}
 		if(contacts.size() == 0 && favorites.size() == 0){
 			System.out.println("No contacts available.");
 		}
 	}
-	
+
 	/**
-	 * 
+	 * Sets contacts in alphabetical order
 	 */
 	public  void compareContacts() {
 		Contact temporary = new Contact();
@@ -132,23 +139,7 @@ public class PhoneBook{
 	}
 	
 	/**
-	 * 
-	 */
-	public void compareFavorites() {
-		for (int i = 0; i < favorites.size(); i++) {
-			for (int j = 0; j < favorites.size(); j++) {
-				if (favorites.get(i).getSpeedDial() < favorites.get(j).getSpeedDial()) {
-					Contact temporaryFavorite = new Contact(favorites.get(j).getName(), favorites.get(j).getNumber(), favorites.get(j).getNotes(),
-							favorites.get(j).getSpeedDial());
-					favorites.set(j, favorites.get(i));
-					favorites.set(i, temporaryFavorite);
-				}
-			}
-		}
-	}
-	
-	/**
-	 * 
+	 * formats a string of numbers
 	 * @param unformattedNumber - String
 	 * @return String
 	 */

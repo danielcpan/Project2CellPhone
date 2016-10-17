@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import javax.swing.*;
 
@@ -9,25 +8,14 @@ import javax.swing.*;
 */
 public class FavoriteContactFrame extends JPanel{
 	
-	public static final String DEFAULT_DIRECTORY = "C:\\Users\\Chad\\Pictures\\CECS274Proj2\\unknown.jpg";
 	private Image image; // Declare a name for our Image object.
 	private Image background;
 	private Dimension window;  //Declare the dimensions of the window.
 	private String nameInfo;
 	private String numberInfo;
 	private String notesInfo;
+	private String directory;
 	
-
-	/**
-	 * Initializes the JPanel instance variables to default values and image to null
-	 * */
-	public FavoriteContactFrame(){
-		   
-		   super();  //Calling parent constructor to initialize all the instance variables in the JPanel class
-		   image = null;
-		   window = new Dimension(600, 400);  //Sets default window dimensions of 600 pixels wide X 400 pixel high
-		   
-	}
 	
 	/**
 	 * Initializes the JPanel instance variables to default values and gets image with given directory
@@ -43,7 +31,7 @@ public class FavoriteContactFrame extends JPanel{
 	public FavoriteContactFrame(FavoriteContactFrame other)
 	{
 		super();
-		this.image = Toolkit.getDefaultToolkit().getImage(DEFAULT_DIRECTORY);
+		this.image = Toolkit.getDefaultToolkit().getImage(other.directory);
 		this.background = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
 		this.window = new Dimension(other.window);
 		this.setNameInfo(other.nameInfo);
@@ -110,7 +98,9 @@ public class FavoriteContactFrame extends JPanel{
 		  frame.setVisible(true);		
 		
 	}
-	
+	/**
+	 * Opens up a window and displays favorite information
+	 */
 	public void displayContactImage(){
 		//Creating the window
 		  JFrame frame = new JFrame("Favorite Contact: " + this.getName());  //title of the frame will be "Favorite Contact"
@@ -123,6 +113,13 @@ public class FavoriteContactFrame extends JPanel{
 		
 	}
   
+
+	/**
+	 * Scales picture based on window
+	 * @param imgSize
+	 * @param windowSize
+	 * @return new window dimensions
+	 */
   // helper method that scales the image based on window dimensions
   private static Dimension getScaledDimension(Dimension imgSize, Dimension windowSize) {
 
@@ -151,31 +148,44 @@ public class FavoriteContactFrame extends JPanel{
 
 	    return new Dimension(new_width, new_height);
 	}
+  
+  /**
+   * Scales background to window size
+   * @param bgSize
+   * @param windowSize
+   * @return new background dimensions
+   */
   private static Dimension getScaledDimensionBg(Dimension bgSize, Dimension windowSize) {
 	  int new_width = (int)windowSize.getWidth();
 	  int new_height = (int)windowSize.getHeight();
 	  return new Dimension(new_width, new_height); 
   }
+  /**
+   * Sets name of favorite
+   * @param nameInfo
+   */
   public void setNameInfo(String nameInfo){
 	  this.nameInfo = nameInfo;
   }
+  /**
+   * Sets number of favorite
+   * @param numberInfo
+   */
   public void setNumberInfo(String numberInfo){
 	  this.numberInfo = numberInfo;
   }
+  /**
+   * Sets notes of favorite
+   * @param notesInfo
+   */
   public void setNotesInfo(String notesInfo){
 	  this.notesInfo = notesInfo;
   }
-
-  /*public static void main(String arg[]){
-
-	  int fWidth = 800;
-	  int fHeight = 600;
-	  
-
-    //ContactImage contact = new ContactImage("C:\\Users\\Katherine\\Pictures\\totoro.jpg", fWidth, fHeight);
-	  FavoriteContactFrame contact = new FavoriteContactFrame("C:\\Users\\Katherine\\Pictures\\gitProfile.jpg", fWidth, fHeight);
-	  contact.displayContactImage();
-
- 
-  }*/
+  /**
+   * Sets directory of favorite
+   * @param directory
+   */
+ public void setDirectory(String directory){
+	 this.directory = directory;
+ }
 }
