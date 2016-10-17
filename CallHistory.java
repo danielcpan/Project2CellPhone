@@ -95,9 +95,9 @@ public class CallHistory {
 			this.referToIndex[i] = i;
 		}
 		
-		for (int i = 0; i < this.log.size(); i++)
+		for (int i = 0; i < this.log.size()-1; i++)
 		{
-			for (int j = 1; j < this.log.size()-1; j++)
+			for (int j = 1; j < this.log.size(); j++)
 			{
 				if (this.log.get(i).getContact().equals(this.log.get(j).getContact()) && this.log.get(i).getDate().equals(this.log.get(j).getDate()) && this.log.get(i).getIsIncoming().equals(this.log.get(j).getIsIncoming()))
 				{
@@ -158,6 +158,7 @@ public class CallHistory {
 	{	
 		int[] numCalls, referTo;
 		int index, temp, count;
+		
 		
 		numCalls = new int[length];
 		referTo = new int[length];

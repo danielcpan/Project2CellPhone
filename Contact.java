@@ -1,3 +1,4 @@
+
 /**
 <<<<<<< HEAD
  * holds characteristics of a contact: name, number, notes can be used to create
