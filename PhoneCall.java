@@ -1,58 +1,94 @@
-
 import java.util.Calendar;
 
+/**
+ * Every PhoneCall object has an instance variable String time, String date, boolean isIncoming, Contact contact.
+ * Simulates every phone call made, a PhoneCall object is created.
+ * @author Chad, Victoria, Daniel P, Daniel R, Minh
+ */
 public class PhoneCall {
-	private String timestamp;
-	private String datestamp;
-	private boolean phoneStatus;
+	
+	/*****INSTANCE VARIABLES*****/
+	private String time;
+	private String date;
+	private boolean isIncoming;
 	private Contact contact;
-	private String status;
-	private int numberOfCalls = 1;
-	private int index;
 
-	public PhoneCall() {
+//CONSTRUCTORS
+	/**
+	 * copy constructor - initializes instance variables to parameter PhoneCall object's values
+	 * @param other - PhoneCalls
+	 * returns reference to PhoneCall object created
+	 */
+	public PhoneCall(PhoneCall other) {
+		this.setAll(new Contact(other.contact),other.time,other.isIncoming,other.date);
+	}
 
+	/**
+	 * loaded constructor - sets time and date using calcTime() and calcDate() methods
+	 * @param contact - Contact 
+	 * @param isIncoming - boolean
+	 * returns reference to PhoneCall object created
+	 */
+	public PhoneCall(Contact contact, boolean isIncoming) {
+		String time, date;
+		
+		time = this.calcTime();
+		date = this.calcDate();
+		this.setAll(contact, time, isIncoming, date);
 	}
 	
-	public PhoneCall(Contact contact, String timestamp, boolean phoneStatus) {
-		this.calcTimestamp();
-		this.calcDateStamp();
-		this.setAll(contact, this.getTimestamp(), phoneStatus, numberOfCalls, this.getDatestamp(), index);
-	}
-	public void setAll(Contact contact, String timestamp, boolean phoneStatus, int numberOfCalls, String datestamp, int index) {
+//SETTERS
+	/**
+	 * sets all instance variables with parameter values
+	 * @param contact - Contact
+	 * @param time - String
+	 * @param isIncoming - boolean
+	 * @param date - String
+	 */
+	public void setAll(Contact contact, String time, boolean isIncoming, String date) {
 		this.setContact(contact);
-		this.setTimestamp(timestamp);
-		this.setphoneStatus(phoneStatus);
-		this.setNumberOfCalls(numberOfCalls);
-		this.setDateStamp(datestamp);
-		this.setIndex(index);
+		this.setTime(time);
+		this.setIsIncoming(isIncoming);
+		this.setDate(date);
 	}
 
+	/**
+	 * sets this.contact
+	 * @param contact - Contact
+	 */
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
 
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
+	/**
+	 * sets this.time
+	 * @param time - String
+	 */
+	public void setTime(String time) {
+		this.time = time;
 	}
 
-	public void setDateStamp(String datestamp) {
-		this.datestamp = datestamp;
+	/**
+	 * sets this.date
+	 * @param date - String
+	 */
+	public void setDate(String date) {
+		this.date = date;
 	}
 
-	public void setphoneStatus(boolean phoneStatus) {
-		this.phoneStatus = phoneStatus;
+	/**
+	 * sets this.isIncoming
+	 * @param isIncoming - boolean
+	 */
+	public void setIsIncoming(boolean isIncoming) {
+		this.isIncoming = isIncoming;
 	}
 
-	public void setNumberOfCalls(int numberOfCalls) {
-		this.numberOfCalls = numberOfCalls;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	public void calcTimestamp() {
+	/**
+	 * creates Calendar object to get the timestamp of when the PhoneCall object is created
+	 * @return String
+	 */
+	public String calcTime() {
 		Calendar today;
 		int day, month, year, hour;
 		String minute;
@@ -62,6 +98,10 @@ public class PhoneCall {
 		if (hour == 0) {
 			hour = 12;
 		}
+		else if (hour > 12)
+		{
+			hour -= 12;
+		}
 		minute = String.format("%02d", today.get(Calendar.MINUTE));
 		if (today.get(Calendar.AM_PM) == 0) {
 			amPm = "AM";
@@ -69,10 +109,15 @@ public class PhoneCall {
 		else {
 			amPm = "PM";
 		}
-		this.timestamp = hour + ":" + minute + ":" + amPm;
+		
+		return hour + ":" + minute + amPm;
 	}
 
-	public void calcDateStamp() {
+	/**
+	 * creates Calendar object to get the datestamp of when the PhoneCall object is created
+	 * @return String
+	 */
+	public String calcDate() {
 		Calendar today;
 		int day, month, year;
 		today = Calendar.getInstance();
@@ -80,38 +125,47 @@ public class PhoneCall {
 		month = today.get(Calendar.MONTH) + 1;
 		year = today.get(Calendar.YEAR);
 
-		this.datestamp = month + "/" + day + "/" + year;
+		return month + "/" + day + "/" + year;
 	}
 
-	public String getTimestamp() {
-		return timestamp;
+//GETTERS
+	/**
+	 * @return String time
+	 */
+	public String getTime() {
+		return this.time;
 	}
 
-	public String getDatestamp() {
-		return datestamp;
+	/**
+	 * @return String date
+	 */
+	public String getDate() {
+		return this.date;
 	}
 
+	/**
+	 * @return Contact contact object reference (SHALLOW COPY!!!)
+	 */
 	public Contact getContact() {
-		return contact;
+		return this.contact;
 	}
 
-	public String getPhoneStatus() {
-		status = " ";
-		if (phoneStatus == true) {
-			status = "Incoming";
+	/**
+	 * @return String - "incoming" if true; "outgoing" if false
+	 */
+	public String getIsIncoming() {
+		if (this.isIncoming)
+		{
+			return "incoming";
 		}
-		else {
-			status = "Outgoing";
-		}
-		return status;
+		return "outgoing";
 	}
-
-	public int getNumberOfCalls() {
-		return numberOfCalls;
+	
+	/**
+	 * @return String - instance variables Contact, date, time, status concatenated
+	 */
+	public String toString()
+	{
+		return "contact = " + this.contact + ", date = " + this.date + " ,time = " + this.time + " ,status = " + this.getIsIncoming();
 	}
-
-	public int getIndex() {
-		return index;
-	}
-
 }

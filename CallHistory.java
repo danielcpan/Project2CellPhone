@@ -1,96 +1,194 @@
 import java.util.ArrayList;
 
+/**
+ * Every CallHistory object has instance variables ArrayList<PhoneCall> log, int[] referToIndex, int[] numberOfCalls, String[] printLog.
+ * Simulates how a call log in a phone can display information in multiple folders.
+ * @author Chad, Victoria, Daniel P, Daniel R, Minh
+ */
 public class CallHistory {
 
-	private ArrayList<PhoneCall> log = new ArrayList<PhoneCall>();
-	private ArrayList<PhoneCall> hiddenLog = new ArrayList<PhoneCall>();
-
+	/*****INSTANCE VARIABLES*****/
+	private ArrayList<PhoneCall> log;
+	private int[] referToIndex;
+	private int[] numberOfCalls;
+	private String[] printLog;
+	
+//CONSTRUCTORS
+	/**
+	 * default constructor - instantiates ArrayList<PhoneCall> log only
+	 */
 	public CallHistory() {
-
+		this.log = new ArrayList<PhoneCall>();
 	}
 
-	public void addCall(PhoneCall contact) {
-		log.add(contact);
+	/**
+	 * copy constructor - initializes CallHistory object instance variable ArrayList<PhoneCall> log to parameter value
+	 * @param other - CallHistory
+	 */
+	public CallHistory(CallHistory other)
+	{
+		this.log = new ArrayList<PhoneCall>();
+		
+		for (int i = 0; i < other.log.size(); i++)
+		{
+			this.log.add(new PhoneCall(other.log.get(i)));
+		}
 	}
 
-	public void displayCallLog() {
-		checkNumberOfCalls();
-		System.out.println("Call History");
+//SETTERS
+	/**
+	 * adds PhoneCall parameter to ArrayList<PhoneCall> log
+	 * @param contact - PhoneCall
+	 */
+	public void addCall(PhoneCall phoneCall) {
+		this.log.add(phoneCall);
+	}
+	
+//GETTERS
+	/**
+	 * @return ArrayList<PhoneCall> reference (SHALLOW COPY!!!)
+	 */
+	public ArrayList<PhoneCall> getLog()
+	{
+		return this.log;
+	}
+	
+	/**
+	 * @return int[] referToIndex reference (SHALLOW COPY!!!)
+	 */
+	public int[] getReferToIndex()
+	{
+		return this.referToIndex;
+	}
+	
+	/**
+	 * @return int[] numberOfCalls reference (SHALLOW COPY!!!)
+	 */
+	public int[] getNumberOfCalls()
+	{
+		return this.numberOfCalls;
+	}
+	
+	/**
+	 * @return String[] printLog reference (SHALLOW COPY!!!)
+	 */
+	public String[] getPrintLog()
+	{
+		return this.printLog;
+	}
+
+//OTHER METHODS
+	/**
+	 * 
+	 */
+	public void displayCallLog()
+	{	
+		int count,temp;
+		
+		count = 0;
+		this.printLog = new String[this.log.size()];
+		this.numberOfCalls = new int[this.log.size()];
+		this.referToIndex = new int[this.log.size()];
+	
+		for (int i = 0; i < this.log.size(); i++)
+		{
+			this.referToIndex[i] = i;
+		}
+		
+		for (int i = 0; i < this.log.size(); i++)
+		{
+			for (int j = 1; j < this.log.size()-1; j++)
+			{
+				if (this.log.get(i).getContact().equals(this.log.get(j).getContact()) && this.log.get(i).getDate().equals(this.log.get(j).getDate()) && this.log.get(i).getIsIncoming().equals(this.log.get(j).getIsIncoming()))
+				{
+					this.referToIndex[i] = j;
+				}
+			}
+		}
+		
+		for (int i = 0; i < this.log.size(); i++)
+		{
+			if (this.referToIndex[i] == i)
+			{
+				this.numberOfCalls[i]++;	
+			}
+			else
+			{
+				this.numberOfCalls[this.referToIndex[i]]++;
+			}
+		}
+		System.out.println("\nCall History");
 		System.out.println("--------------------");
-		for (int i = 0; i < log.size(); i++) {
-			if ((log.get(i).getNumberOfCalls() > 1)) {
-				if (log.get(i).getContact().getName().equals("UNKNOWN")) {
-					System.out.println(i+1 + "." + "|Number: " + log.get(i).getContact().getNumber() + " (" + log.get(i).getNumberOfCalls() + ")");
+		
+		for (int i = 0; i < this.log.size(); i++)
+		{
+			if (numberOfCalls[i] == 1 && this.referToIndex[i] == i)
+			{
+				if (this.log.get(i).getContact().getName().equals("UNKNOWN")) {
+					this.printLog[count] = (count+1 + "." + "|Number: " + log.get(i).getContact().getNumber() + "\n  |Time: " + log.get(i).getTime() + "\n  |Date: " + log.get(i).getDate() + "\n  |Status: " + log.get(i).getIsIncoming());
 				}
 				else {
-					System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName() + " (" + log.get(i).getNumberOfCalls() + ")");
-					System.out.println("  |Number: " + log.get(i).getContact().getNumber());
+					this.printLog[count] = (count+1 + "." + "|Name: " + log.get(i).getContact().getName() + "\n  |Number: " + log.get(i).getContact().getNumber() + "\n  |Time: " + log.get(i).getTime() + "\n  |Date: " + log.get(i).getDate() + "\n  |Status: " + log.get(i).getIsIncoming());
 				}
+				System.out.println(this.printLog[count]);
 				System.out.println("--------------------");
+				count++;
 			}
-			else if ((log.get(i).getNumberOfCalls() == 1)) {
-				if (log.get(i).getContact().getName().equals("UNKNOWN")) {
-					System.out.println(i+1 + "." + "|Number: " + log.get(i).getContact().getNumber());
-					System.out.println("  |Time: " + log.get(i).getTimestamp());
-					System.out.println("  |Date: " + log.get(i).getDatestamp());
-					System.out.println("  |Status: " + log.get(i).getPhoneStatus());
+			if (this.numberOfCalls[i] > 1)
+			{
+				if (this.log.get(i).getContact().getName().equals("UNKNOWN")) {
+					this.printLog[count] = (count+1 + "." + "|Number: " + log.get(i).getContact().getNumber() + " (" + this.numberOfCalls[i] + ")");
 				}
 				else {
-					System.out.println(i+1 + "." + "|Name: " + log.get(i).getContact().getName());
-					System.out.println("  |Number: " + log.get(i).getContact().getNumber());
-					System.out.println("  |Time: " + log.get(i).getTimestamp());
-					System.out.println("  |Date: " + log.get(i).getDatestamp());
-					System.out.println("  |Status: " + log.get(i).getPhoneStatus());
+					this.printLog[count] = (count+1 + "." + "|Name: " + log.get(i).getContact().getName() + " (" + this.numberOfCalls[i] + ")\n" + "  |Number: " + log.get(i).getContact().getNumber());
 				}
+				System.out.println(this.printLog[count]);
 				System.out.println("--------------------");
+				count++;
 			}
 		}
 	}
-
-	public void displayHiddenLog(int index) {
-		int count = 0;
-		for (int i = 0; i < log.size(); i ++) {
-			if (log.get(i).getIndex()==index) {
+	
+	/**
+	 * 
+	 * @param number
+	 * @param length
+	 */
+	public void displayHiddenLog(int number, int length) //more info
+	{	
+		int[] numCalls, referTo;
+		int index, temp, count;
+		
+		numCalls = new int[length];
+		referTo = new int[length];
+		
+		index = number-1;
+		count = 0;
+		
+		for (int i = 0; i < this.numberOfCalls.length; i++)
+		{
+			if (this.numberOfCalls[i] != 0)
+			{
+				numCalls[count] = this.numberOfCalls[i];
+				referTo[count] = this.referToIndex[i];
 				count++;
-				System.out.println(count + "." + "|Name: " + log.get(i).getContact().getName());
-				System.out.println("  |Number: " + log.get(i).getContact().getNumber());
-				System.out.println("  |Time: " + log.get(i).getTimestamp());
-				System.out.println("  |Date: " + log.get(i).getDatestamp());
-				System.out.println("  |Status: " + log.get(i).getPhoneStatus());
-				System.out.println("--------------------");
 			}
 		}
-		for (int j = 0; j < hiddenLog.size(); j++) {
-			if (hiddenLog.get(j).getIndex()==index) {
-				count++;
-				System.out.println(count + "." + "|Name: " + hiddenLog.get(j).getContact().getName());
-				System.out.println("  |Number: " + hiddenLog.get(j).getContact().getNumber());
-				System.out.println("  |Time: " + hiddenLog.get(j).getTimestamp());
-				System.out.println("  |Date: " + hiddenLog.get(j).getDatestamp());
-				System.out.println("  |Status: " + hiddenLog.get(j).getPhoneStatus());
-				System.out.println("--------------------");				
-			}
-		}
-	}
-
-	public void checkNumberOfCalls() {
-		int numberOfCalls;
-		for (int i = 0; i < log.size(); i++) {
-			for (int j = i+1; j < log.size(); j++) {
-				if (log.get(i).getContact().getNumber().equals(log.get(j).getContact().getNumber())
-					&& log.get(i).getDatestamp().equals(log.get(j).getDatestamp())
-					&& log.get(i).getPhoneStatus().equals(log.get(j).getPhoneStatus())) {
-					numberOfCalls = log.get(i).getNumberOfCalls();
-					numberOfCalls++;
-					log.get(i).setNumberOfCalls(numberOfCalls);
-					log.get(i).setIndex(i+1);
-					System.out.println("Index " + log.get(i).getIndex());
-					log.get(j).setIndex(log.get(i).getIndex());
-					hiddenLog.add(log.get(j));
-					log.remove(j);
-					j--;
+		
+		temp = referTo[index];
+		
+		if (this.numberOfCalls[temp] >= 1)
+		{
+			for (int i = 0; i < this.referToIndex.length; i++)
+			{
+				if (this.referToIndex[i] == temp)
+				{
+					System.out.println("--------------------");
+					System.out.println("  |Name: " + log.get(i).getContact().getName() + "\n  |Number: " + log.get(i).getContact().getNumber() + "\n  |Time: " + log.get(i).getTime() + "\n  |Date: " + log.get(i).getDate() + "\n  |Status: " + log.get(i).getIsIncoming());
+					System.out.println("--------------------");
 				}
 			}
 		}
 	}
+	
 }
