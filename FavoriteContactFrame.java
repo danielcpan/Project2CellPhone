@@ -9,9 +9,9 @@ import javax.swing.*;
 */
 public class FavoriteContactFrame extends JPanel{
 	
-	public static final String DEFAULT_DIRECTORY = "DEFAULT PATH IDK";
+	public static final String DEFAULT_DIRECTORY = "C:\\Users\\Chad\\Pictures\\CECS274Proj2\\unknown.jpg";
 	private Image image; // Declare a name for our Image object.
-	private Image background1;
+	private Image background;
 	private Dimension window;  //Declare the dimensions of the window.
 	private String nameInfo;
 	private String numberInfo;
@@ -37,14 +37,14 @@ public class FavoriteContactFrame extends JPanel{
 		   super();     
 		   window = new Dimension(fWidth, fHeight);	//Sets window dimensions of fWidth pixels wide X fHeight pixel high		   
 		   image = Toolkit.getDefaultToolkit().getImage(directory);  // Load an image file into our Image object.
-		   background1 = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
+		   background = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
 	}
 
 	public FavoriteContactFrame(FavoriteContactFrame other)
 	{
 		super();
 		this.image = Toolkit.getDefaultToolkit().getImage(DEFAULT_DIRECTORY);
-		this.background1 = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
+		this.background = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Chad\\Pictures\\CECS274Proj2\\background2.jpg");
 		this.window = new Dimension(other.window);
 		this.setNameInfo(other.nameInfo);
 		this.setNumberInfo(other.numberInfo);
@@ -65,14 +65,14 @@ public class FavoriteContactFrame extends JPanel{
 		  // Resizing our image to fit the window
 		  Dimension originalImg = new Dimension(image.getWidth(this), image.getHeight(this));	    
 		  Dimension resizedImg = getScaledDimension(originalImg, window);
-		  Dimension originalBg = new Dimension(background1.getWidth(this), background1.getHeight(this));
+		  Dimension originalBg = new Dimension(background.getWidth(this), background.getHeight(this));
 		  Dimension resizedBg = getScaledDimensionBg(originalBg, window);
 		  Font title = new Font("Monotype Corsiva", Font.BOLD, 55);
 		  Font information = new Font("Impact", Font.PLAIN, 55);
 		  	
 		  
 		// Draw our Image object.
-		  g.drawImage(background1, 0, 0, resizedBg.width, (int) resizedBg.getHeight(), this);
+		  g.drawImage(background, 0, 0, resizedBg.width, (int) resizedBg.getHeight(), this);
 		  g.setColor(Color.orange);
 		  g.fillRect(0, 0, resizedImg.width + 20, resizedImg.height+20);
 		  g.setColor(Color.red);
