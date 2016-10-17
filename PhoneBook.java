@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-
 /**
  * Every PhoneBook object has instance variables ArrayList<Contact> contacts, ArrayList<Contact> favorites, CallHistory myCallHistory.
  * Simulates a phone where all the contacts, favorites, and call log data is saved.
@@ -124,7 +122,9 @@ public class PhoneBook{
 				// less than 0 means contact i comes before contact j
 				// alphabetically
 				if (contacts.get(i).getName().compareTo(contacts.get(j).getName()) < 0) {
+					temporary = contacts.get(j);
 					contacts.set(j, contacts.get(i));
+					contacts.set(i, temporary);
 				}
 			}
 		}
